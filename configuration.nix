@@ -29,8 +29,8 @@
   
   #DisplayManager
   services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.displayManager.lightdm.autoLogin.enable = true;
-  services.xserver.displayManager.lightdm.autoLogin.user = "zorin";
+  services.xserver.displayManager.autoLogin.enable = true;
+  services.xserver.displayManager.autoLogin.user = "zorin";
   
   #Allow Shell To Operate
   programs.fish.enable = true;

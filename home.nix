@@ -7,10 +7,9 @@
  home.file. ".config/picom/picom.conf" ={
 	source = ./picom/picom.conf;
 };
- home.file.".config/ghostty/config.toml".text = ''
-	[terminal]
-	opacity = 0.9
-     '';
+ home.file.".config/ghostty/config.toml" = {
+   source = ./ghostty/config;
+ };
  home.stateVersion = "24.05";
 
  #Qtile accses point
