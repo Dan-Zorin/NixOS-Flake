@@ -13,13 +13,17 @@
      '';
  home.stateVersion = "24.05";
 
-#Qtile accses point
- home.file.".config/qtile".source = ./qtile;
+ #Qtile accses point
+ home.file.".config/qtile" = {
+ source = ./qtile;
+ recursive = true;
+};
+
  home.file.".config/qtile/config.py".source = ./qtile/config.py;
  home.file.".config/qtile/autostart.sh" = {
 	source = ./qtile/autostart.sh; 
 	executable = true;
 };
-# home.file.".config/qtile/widgets/mywidget.py".source = ./qtile/widgets/mywidget.py;
+ # home.file.".config/qtile/widgets/mywidget.py".source = ./qtile/widgets/mywidget.py;
 
 }

@@ -36,6 +36,8 @@
   };
  
   environment.systemPackages = with pkgs; [
+	neovim
+	discord
 	git 
  	vim
  	curl
@@ -50,6 +52,7 @@
 	xfce.thunar
 	feh
    	myQtile
+
  ];
 
   system.stateVersion = "24.05";
