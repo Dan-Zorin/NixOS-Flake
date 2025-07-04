@@ -27,7 +27,7 @@
   services.xserver.windowManager.qtile.enable = true;
   
   #intel Service
- services.auto-cpufreq = enable
+
 
   users.users.zorin ={
  	isNormalUser = true;
