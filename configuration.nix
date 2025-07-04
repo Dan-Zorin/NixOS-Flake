@@ -44,7 +44,7 @@
    	xterm 
 	fish
    	rofi 
-	thunar
+	xfce.thunar
 	feh
    	myQtile
  ];

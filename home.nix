@@ -4,7 +4,7 @@
  home.username = "zorin";
  home.homeDirectory = "/home/zorin";
 
- home.file. ".config/picom.conf" ={
+ home.file. ".config/picom/picom.conf" ={
 	source = ./picom/picom.conf;
 };
  home.file.".config/ghostty/config.toml".text = ''
