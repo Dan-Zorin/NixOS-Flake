@@ -13,5 +13,15 @@
 	[terminal]
 	opacity = 0.9
      '';
-  home.stateVersion = "24.05";
+ home.stateVersion = "24.05";
+
+#Qtile acces point
+ home.file.".config/qtile".source = ./qtile;
+ home.file.".config/qtile/config.py".source = ./qtile/config.py;
+ home.file.".config/qtile/autostart.sh" = {
+	source = ./qtile/autostart.sh; 
+	executable = true;
+};
+# home.file.".config/qtile/widgets/mywidget.py".source = ./qtile/widgets/mywidget.py;
+
 }

@@ -1,5 +1,11 @@
 { configs, pkgs, ...}:
-{ 
+   let
+  myQtile = pkgs.python3.withPackages (ps: with ps; [
+  qtile
+  qtile-extras
+  ]);
+  in
+ { 
 	imports = [
 	./hardware-configuration.nix
 	];
@@ -13,7 +19,7 @@
   networking.hostName = "nixos";
   time.timeZone = "America/Panama";
 
-#Service Management 
+  #Service Management 
 
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "nvidia"];
@@ -25,13 +31,14 @@
  	extraGroups = [ "wheel" "video" ];
  	shell = pkgs.bash;
   };
-
+ 
   environment.systemPackages = with pkgs; [
    git vim curl vivaldi vivaldi-ffmpeg-codecs
-   picom ghostty
-   xterm
+   picom ghostty gh
+   xterm fish
    rofi feh
-  ];
+   myQtile
+ ];
 
   system.stateVersion = "24.05";
 }
