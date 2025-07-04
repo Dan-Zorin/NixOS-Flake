@@ -33,11 +33,20 @@
   };
  
   environment.systemPackages = with pkgs; [
-   git vim curl vivaldi vivaldi-ffmpeg-codecs
-   picom ghostty gh
-   xterm fish
-   rofi feh
-   myQtile
+	git 
+ 	vim
+ 	curl
+ 	vivaldi 
+	vivaldi-ffmpeg-codecs
+   	picom
+	ghostty 
+	gh
+   	xterm 
+	fish
+   	rofi 
+	thunar
+	feh
+   	myQtile
  ];
 
   system.stateVersion = "24.05";

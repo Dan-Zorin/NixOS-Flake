@@ -4,18 +4,16 @@
  home.username = "zorin";
  home.homeDirectory = "/home/zorin";
 
- home.file. ".config/picom.conf".text = ''
-	backend = "glx";
-	vsync = true;
-	opacity-rule = ["90:class_g = 'Ghostty'"];
- '';
+ home.file. ".config/picom.conf" ={
+	source = ./picom/picom.conf;
+};
  home.file.".config/ghostty/config.toml".text = ''
 	[terminal]
 	opacity = 0.9
      '';
  home.stateVersion = "24.05";
 
-#Qtile acces point
+#Qtile accses point
  home.file.".config/qtile".source = ./qtile;
  home.file.".config/qtile/config.py".source = ./qtile/config.py;
  home.file.".config/qtile/autostart.sh" = {
