@@ -26,8 +26,10 @@
   services.xserver.displayManager.startx.enable = true;
   services.xserver.windowManager.qtile.enable = true;
   
-  #intel Service
-
+  #DisplayManager
+  services.xserver.displayManager.lightdm.enable = true;
+  services.xserver.displayManager.lightdm.autoLogin.enable = true;
+  services.xserver.displayManager.lightdm.autoLogin.user = "zorin";
 
   users.users.zorin ={
  	isNormalUser = true;
@@ -43,17 +45,16 @@
  	curl
  	vivaldi 
 	vivaldi-ffmpeg-codecs
-   	picom
+  picom
 	ghostty 
 	gh
-   	xterm 
+  xterm 
 	fish
-   	rofi 
+  rofi 
 	xfce.thunar
 	feh
-   	myQtile
-
- ];
+  myQtile
+];
 
   system.stateVersion = "24.05";
 }
