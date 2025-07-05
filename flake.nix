@@ -34,7 +34,7 @@
 	    home-manager.backupFileExtension = "backup";
 		
             # Your Home Manager user config
-            home-manager.users.zorin = import ./hosts/home/home.nix;
+            home-manager.users.zorin = import ./users/zorin/home.nix;
           }
         ];
       };

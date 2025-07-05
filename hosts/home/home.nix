@@ -40,17 +40,17 @@
  
   # Qtile Auto start file
   home.file.".config/qtile/autostart.sh" = {
-    source = ../../qtile/autostart.sh;  # if you want to keep the file separate
+    source = ../../config/qtile/autostart.sh;  # if you want to keep the file separate
     executable = true;
   };
  
   # File definietions (relative to flake root)
   home.file.".config/picom/picom.conf" = {
-    source = ../../picom/picom.conf;
+    source = ../../config/picom/picom.conf;
   };
 
   home.file.".config/ghostty/config" = {
-    source = ../../ghostty/config;
+    source = ../../config/ghostty/config;
   };
 
   home.file.".config/nvim" = {
@@ -61,7 +61,7 @@
   };
 
   home.file.".config/qtile/config.py" = {
-    source = ../../qtile/config.py;
+    source = ../../config/qtile/config.py;
   };
 
   # Optional autostart script

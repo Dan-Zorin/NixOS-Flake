@@ -35,6 +35,7 @@
   };
  
   environment.systemPackages = with pkgs; [
+	home-manager
 	xterm
 	git 
  	vim
