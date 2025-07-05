@@ -7,7 +7,7 @@
  home.file. ".config/picom/picom.conf" ={
 	source = ./picom/picom.conf;
 };
- home.file.".config/ghostty/config.toml" = {
+ home.file.".config/ghostty/config" = {
    source = ./ghostty/config;
  };
  home.stateVersion = "24.05";
