@@ -1,13 +1,6 @@
 { configs, pkgs, ...}:
-   let
-  myQtile = pkgs.python3.withPackages (ps: with ps; [
-  qtile
-  qtile-extras
-  ]);
-  in
- { 
 
-
+{
 	imports = [
 	./hardware-configuration.nix
 	];
@@ -42,23 +35,10 @@
   };
  
   environment.systemPackages = with pkgs; [
-	neovim
-	discord
+	xterm
 	git 
  	vim
- 	curl
- 	vivaldi 
-	vivaldi-ffmpeg-codecs
-  picom
-	ghostty 
-	gh
-  xterm 
-	fish
-  rofi 
-	xfce.thunar
-	feh
-  myQtile
-];
+  ];
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "25.05";
 }
