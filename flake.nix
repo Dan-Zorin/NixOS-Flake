@@ -23,7 +23,7 @@
         system = "x86_64-linux";
 
         modules = [
-          ./hosts/nixos/configuration.nix
+          ./hosts/nixos/system.nix
 
           # Enable Home Manager as a NixOS module
           home-manager.nixosModules.home-manager
