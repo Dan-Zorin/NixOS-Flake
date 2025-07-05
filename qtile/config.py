@@ -329,8 +329,16 @@ main = None
 
 @hook.subscribe.startup_once
 def start_once():
-    home=os.path.expanduser('~')
-    subprocess.call([home + '/.config/qtile/autostart.sh'])
+    import subprocess
+
+    # Your autostart commands directly in Python
+    subprocess.Popen(["lxsession"])
+    subprocess.Popen(["xrandr", "--output", "HDMI-0", "--mode", "1920x1080", "--primary", "-r", "144"])
+    subprocess.Popen(["feh", "--bg-fill", os.path.expanduser("~/.Wallpaper/neon.jpg")])
+    subprocess.Popen(["picom", "--config", os.path.expanduser("~/.config/picom/picom.conf"), "--experimental-backends"])
+    subprocess.Popen(["nm-applet"])
+    subprocess.Popen(["volumeicon"])
+    subprocess.Popen(["dunst"])
 
 follow_mouse_focus=True
 bring_front_click=False

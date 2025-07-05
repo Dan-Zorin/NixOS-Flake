@@ -23,7 +23,6 @@
   #Home user packages 
   home.packages = with pkgs; [
   neovim
-  home-manager
   myQtile
   discord
   vim
@@ -39,7 +38,13 @@
   # Move your qtile setup here too
   ];
  
-  # File definitions (relative to flake root)
+  # Qtile Auto start file
+  home.file.".config/qtile/autostart.sh" = {
+    source = ../../qtile/autostart.sh;  # if you want to keep the file separate
+    executable = true;
+  };
+ 
+  # File definietions (relative to flake root)
   home.file.".config/picom/picom.conf" = {
     source = ../../picom/picom.conf;
   };
@@ -55,9 +60,16 @@
     };
   };
 
-  #home.file.".config/qtile/config.py" = {
-    #source = ../../qtile/config.py;
-  #};
+  home.file.".config/qtile/config.py" = {
+    source = ../../qtile/config.py;
+  };
+
+  # Optional autostart script
+  # You can uncomment this if needed
+  # home.file.".config/qtile/autostart.sh" = {
+  #   source = ../../qtile/autostart.sh;
+  #   executable = true;
+  # };
 
   # Example: You can add starship or other programs here
   # programs.starship.enable = true;
