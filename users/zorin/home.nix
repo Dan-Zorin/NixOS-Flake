@@ -41,11 +41,11 @@
  
   # File definitions (relative to flake root)
   home.file.".config/picom/picom.conf" = {
-    source = ../../picom/picom.conf;
+    source = ../../config/picom/picom.conf;
   };
 
   home.file.".config/ghostty/config" = {
-    source = ../../ghostty/config;
+    source = ../../config/ghostty/config;
   };
 
   home.file.".config/nvim" = {
