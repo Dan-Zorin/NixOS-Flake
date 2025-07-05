@@ -1,31 +1,41 @@
 {
-description = " My NixOS Flake Config with Qtile" ;
+  description = "Dan Zorin's NixOS system with Home Manager";
 
- inputs = {
-	#Home manager
-	nixpkgs.url ="github:NixOS/nixpkgs/nixos-unstable";
-	home-manager.url = "github:nix-community/home-manager";
-	home-manager.inputs.nixpkgs.follows = "nixpkgs";
-		
- 	# NvChad helper
-  	nix4nvchad.url = "github:nix-community/nix4nvchad";
-  	nix4nvchad.inputs.nixpkgs.follows = "nixpkgs";
-	};
- outputs = { self, nixpkgs, home-manager, ...}:
-	 let
-	 system = "x86_64-linux";
-	 in {
- 	 nixosConfigurations.zorin = nixpkgs.lib.nixosSystem {
-		inherit system;
-		modules = [
-		 ./configuration.nix
-		 home-manager.nixosModules.home-manager
-		{
-		 home-manager.useUserPackages = true;
-		 home-manager.users.zorin = import ./home.nix;
-		}
-	       ];
-	      };
-	     };
- }
-			
+  inputs = {
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-24.05";
+    flake-utils.url = "github:numtide/flake-utils";
+    home-manager.url = "github:nix-community/home-manager";
+    home-manager.inputs.nixpkgs.follows = "nixpkgs";
+  };
+
+  outputs = { self, nixpkgs, flake-utils, home-manager, ... }:
+    flake-utils.lib.eachDefaultSystem (system:
+      let
+        pkgs = import nixpkgs {
+          inherit system;
+          config.allowUnfree = true;
+        };
+      in {
+        # DevShell or packages here if needed
+      }
+    ) // {
+      nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+
+        modules = [
+          ./hosts/nixos/configuration.nix
+
+          # Enable Home Manager as a NixOS module
+          home-manager.nixosModules.home-manager
+
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
+
+            # Your Home Manager user config
+            home-manager.users.zorin = import ./hosts/home/home.nix;
+          }
+        ];
+      };
+    };
+}
