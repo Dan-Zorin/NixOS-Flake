@@ -36,7 +36,7 @@
   rofi
   xfce.thunar
   feh
-  ];
+  ];	
  
   # File definitions (relative to flake root)
   home.file.".config/picom/picom.conf" = {
