@@ -10,7 +10,7 @@
 {
   home.username = "zorin";
   home.homeDirectory = "/home/zorin";
-  home.stateVersion = "24.05";
+  home.stateVersion = "25.05";
 
   # Enable fish shell
   programs.fish.enable = true;
@@ -36,7 +36,6 @@
   rofi
   xfce.thunar
   feh
-  # Move your qtile setup here too
   ];
  
   # File definitions (relative to flake root)
@@ -55,9 +54,9 @@
     };
   };
 
-  #home.file.".config/qtile/config.py" = {
-    #source = ../../qtile/config.py;
-  #};
+  home.file.".config/qtile/config.py" = {
+    source = ../../config/qtile/config.py;
+  };
 
   # Example: You can add starship or other programs here
   # programs.starship.enable = true;
