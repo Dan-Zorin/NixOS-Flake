@@ -6,17 +6,18 @@
 
  home.file. ".config/picom/picom.conf" ={
 	source = ./picom/picom.conf;
-};
+ };
  home.file.".config/ghostty/config" = {
    source = ./ghostty/config;
  };
  home.stateVersion = "24.05";
-
- #Qtile accses point
- #home.file.".config/qtile" = {
- #source = ./qtile;
- #recursive = true;
-#};
+ 
+ home.file.".config/nvim" = {
+  source = fetchGit {
+    url = "https://github.com/NvChad/NvChad";
+    rev = "main"; # or a specific commit
+   };
+ };
 
  home.file.".config/qtile/config.py".source = ./qtile/config.py;
 # home.file.".config/qtile/autostart.sh" = {
