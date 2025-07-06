@@ -50,7 +50,7 @@
   home.file.".config/nvim" = {
     source = builtins.fetchGit {
       url = "https://github.com/NvChad/NvChad";
-      rev = "a792fd1d96c1511a165b18911164baa28bf1d6f4";  # Pin to a commit for reproducibility
+      ref = "main";  # Pin to a commit for reproducibility
     };
   };
 
