@@ -7,6 +7,10 @@ from qtile_extras import widget
 from qtile_extras.widget.decorations import PowerLineDecoration
 from libqtile.widget.cpu import CPU
 
+@hook.subscribe.startup_once
+def autostart():
+    subprocess.Popen([os.path.expanduser("~/.config/qtile/autostart.sh")])
+
 home=os.path.expanduser('~')
 mod="mod4" # super key
 alt="mod1"
@@ -326,19 +330,6 @@ mouse=[
 dgroups_key_binder=None
 dgroups_app_rules=[]
 main = None
-
-@hook.subscribe.startup_once
-def start_once():
-    import subprocess
-
-    # Your autostart commands directly in Python
-    subprocess.Popen(["lxsession"])
-    subprocess.Popen(["xrandr", "--output", "HDMI-0", "--mode", "1920x1080", "--primary", "-r", "144"])
-    subprocess.Popen(["feh", "--bg-fill", os.path.expanduser("~/.Wallpaper/neon.jpg")])
-    subprocess.Popen(["picom", "--config", os.path.expanduser("~/.config/picom/picom.conf"), "--experimental-backends"])
-    subprocess.Popen(["nm-applet"])
-    subprocess.Popen(["volumeicon"])
-    subprocess.Popen(["dunst"])
 
 follow_mouse_focus=True
 bring_front_click=False
