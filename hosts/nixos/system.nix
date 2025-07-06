@@ -1,11 +1,5 @@
 { configs, pkgs, ...}:
  
-let
-  myQtile = pkgs.python3.withPackages (ps: with ps; [
-    qtile
-    qtile-extras
-  ]);
-in
 {
   imports = [
     ./hardware.nix
@@ -22,25 +16,10 @@ in
 
   environment.pathsToLink = [ "/share/xsessions" ];
 
-  # Systemd session (.desktop) file
-  environment.etc."xdg/xsessions/qtile-hm.desktop".text = ''
-    [Desktop Entry]
-    Name=Qtile-HM
-    Comment=Qtile from Home Manager
-    Exec=${myQtile}/bin/qtile start
-    Type=Application
-  '';
-
   # Display + X11 settings
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
-
-  services.xserver.windowManager.qtile.enable = true; # we are using custom Qtile
-  services.xserver.desktopManager.xterm.enable = false;
-  services.xserver.displayManager.defaultSession = "qtile-hm"; 
-  services.xserver.displayManager.lightdm.enable = true;
-  services.xserver.displayManager.autoLogin.enable = false; # set to true if needed
-  services.xserver.displayManager.autoLogin.user = "zorin";
+  services.xserver.desktopManager.xterm.enable = false];
  
 
   #Allow Shell To Operate
@@ -52,12 +31,10 @@ in
  	shell = pkgs.fish;
   };
  
-  environment.systemPackages = with pkgs; [
-	home-manager
+  environment.systemPackages = with pkgs;[
 	xterm
 	git 
  	vim
-	myQtile
   ];
 
   system.stateVersion = "25.05";

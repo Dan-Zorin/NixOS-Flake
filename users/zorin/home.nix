@@ -18,7 +18,6 @@
   neovim
   home-manager
   discord
-  vim
   curl
   vivaldi
   vivaldi-ffmpeg-codecs
@@ -31,29 +30,10 @@
   btop
   ];	
  
-  # File definitions (relative to flake root)
-  home.file.".config/picom/picom.conf" = {
-    source = ../../config/picom/picom.conf;
-  };
 
+  # File definitions (relative to flake root)
   home.file.".config/ghostty/config" = {
     source = ../../config/ghostty/config;
-  };
-
-  home.file.".config/nvim" = {
-    source = builtins.fetchGit {
-      url = "https://github.com/NvChad/NvChad";
-      rev = "a792fd1d96c1511a165b18911164baa28bf1d6f4";  # Pin to a commit for reproducibility
-    };
-  };
-
-  home.file.".config/qtile/config.py" = {
-    source = ../../config/qtile/config.py;
-  };
-
-  home.file.".config/qtile/autostart.sh" = {
-    source = ../../config/qtile/autostart.sh;
-     executable = true;
   };
 
   # Example: You can add starship or other programs here

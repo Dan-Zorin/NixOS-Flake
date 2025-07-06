@@ -31,7 +31,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-	    home-manager.backupFileExtension = "backup";
+	    #home-manager.backupFileExtension = "backup";
 		
             # Your Home Manager user config
             home-manager.users.zorin = import ./users/zorin/home.nix;
