@@ -1,4 +1,4 @@
-{ configs, pkgs, ...}:
+{ config, pkgs, ...}:
  
 {
   imports = [
@@ -19,22 +19,77 @@
   # Display + X11 settings
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
-  services.xserver.desktopManager.xterm.enable = false];
- 
+  services.xserver.desktopManager.xterm.enable = false;
+  services.xserver.displayManager.startx.enable = true;
+  services.dbus.enable = true;
+  
+  #Polkit session agent
+  security.polkit.enable = true;
+
+
+  #Daemos services
+  services.emacs = {
+    enable = true;
+    package = pkgs.emacs; # replace with emacs-gtk, or a version provided by the community overlay if desired.
+  };
+
+  
+  #Qtile Service with Extra Package included
+  services.xserver.windowManager.qtile = {
+  	enable = true;
+  	extraPackages = python3Packages: with python3Packages; [
+ 	qtile-extras
+	];
+	};
+
+
+
+
+  #Thunar plugins 
+  services.gvfs.enable = true;
+  services.tumbler.enable = true;
 
   #Allow Shell To Operate
   programs.fish.enable = true;
 
   users.users.zorin ={
  	isNormalUser = true;
- 	extraGroups = [ "wheel" "video" ];
+ 	extraGroups = [ "wheel" "video" "input" "tty" ];
  	shell = pkgs.fish;
   };
- 
+
+  fonts.packages = with pkgs; [
+	font-awesome
+
+  ];
+
+  environment.sessionVariables = {
+  	LIBVA_DRIVER_NAME = "nvidia";
+  	VDPAU_DRIVER = "nvidia";
+  	__GLX_VENDOR_LIBRARY_NAME = "nvidia";
+  	MOZ_ENABLE_WAYLAND = "1";  # if using Firefox/Wayland
+  	NVD_BACKEND = "direct";    # For Vulkan
+  }; 
   environment.systemPackages = with pkgs;[
+	lxsession
 	xterm
+	dconf
 	git 
- 	vim
+	vim
+	libva
+  	libvdpau
+	pavucontrol
+  	vaapiVdpau
+  	vdpauinfo
+  	libva-utils
+  	vulkan-tools
+        xfce.thunar
+  	xfce.thunar-volman         # volume management
+  	xfce.thunar-archive-plugin # archive support
+  	xfce.thunar-media-tags-plugin # media tag editing
+ 	gvfs                       # auto-mount support
+	linuxKernel.packages.linux_libre.cpupower
+       
   ];
 
   system.stateVersion = "25.05";

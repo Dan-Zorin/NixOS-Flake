@@ -8,35 +8,34 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, flake-utils, home-manager, ... }:
-    flake-utils.lib.eachDefaultSystem (system:
-      let
-        pkgs = import nixpkgs {
-          inherit system;
-          config.allowUnfree = true;
-        };
-      in {
-        # DevShell or packages here if needed
-      }
-    ) // {
+  outputs = { self, nixpkgs, flake-utils, home-manager, ... }@inputs:
+    let
+      system = "x86_64-linux";
+      pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+    in {
+      # 🧠 Full NixOS system config
       nixosConfigurations.zorin = nixpkgs.lib.nixosSystem {
-        system = "x86_64-linux";
-
+        inherit system;
         modules = [
           ./hosts/nixos/system.nix
 
-          # Enable Home Manager as a NixOS module
           home-manager.nixosModules.home-manager
-
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-	    #home-manager.backupFileExtension = "backup";
-		
-            # Your Home Manager user config
             home-manager.users.zorin = import ./users/zorin/home.nix;
           }
         ];
       };
+
+      # 🧠 Standalone Home Manager
+      homeConfigurations.zorin = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [ ./users/zorin/home.nix ];
+      };
     };
 }
+

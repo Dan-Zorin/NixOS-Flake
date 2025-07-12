@@ -9,6 +9,7 @@ from libqtile.widget.cpu import CPU
 
 @hook.subscribe.startup_once
 def autostart():
+    home = os.path.expanduser("~")
     subprocess.Popen([os.path.expanduser("~/.config/qtile/autostart.sh")])
 
 home=os.path.expanduser('~')
@@ -242,7 +243,7 @@ def init_widgets():
             background=colors["medium"],
         ),
         widget.TextBox(
-            text=" ",
+            text=" ",
             font="JetBrains Mono Nerd",
             fontsize=16,
             background=colors["medium"],
