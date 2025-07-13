@@ -4,38 +4,11 @@
   home.username = "zorin";
   home.homeDirectory = "/home/zorin";
   home.stateVersion = "25.05";
-
+  home.packages = import ./packages.nix { inherit pkgs; };
 
   # Optional: set default shell
   # You should also set this in configuration.nix under users.users.zorin.shell
    programs.fish.enable = true;
-
-  
-  #Home user packages 
-  home.packages = with pkgs; [
-  home-manager
-  gnome-disk-utility
-  vesktop
-  mpv
-  noto-fonts-color-emoji
-  easyeffects
-  curl
-  dunst
-  vivaldi
-  vivaldi-ffmpeg-codecs
-  picom
-  ghostty
-  gh
-  rofi
-  xfce.thunar
-  feh
-  btop
-  steam
-  bottles
-  blender
-  
-  ];
-
 
   # Qtile starting by using startx
   home.file.".xinitrc".text = ''
