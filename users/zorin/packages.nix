@@ -22,6 +22,8 @@ with pkgs; [
   fastfetch
   feh
   btop
+  gpu-screen-recorder
+  gpu-screen-recorder-gtk
   steam
   bottles
   blender
