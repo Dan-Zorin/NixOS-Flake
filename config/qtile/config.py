@@ -1,6 +1,6 @@
 import os
 import subprocess
-from libqtile import layout, bar, widget, hook 
+from libqtile import layout, bar, widget, hook
 from libqtile.config import Drag, Group, Key, Match, Screen, KeyChord
 from libqtile.lazy import lazy
 from qtile_extras import widget
@@ -37,7 +37,7 @@ keys = [
     Key([alt], "3", lazy.spawn("neovide")),
     Key([alt], "4", lazy.spawn("spotify")),
     Key([alt], "5", lazy.spawn("vesktop")),
-# SUPER + ... KEYS 
+# SUPER + ... KEYS
     Key([mod], "v", lazy.spawn("rofi -show drun")),
     Key([mod], "b", lazy.spawn("pcmanfm")),
     Key([mod], "period", lazy.spawn("rofi -show emoji")),
@@ -99,7 +99,7 @@ layout_theme={
 }
 
 layouts=[
-    layout.RatioTile(**layout_theme),    
+    layout.RatioTile(**layout_theme),
     layout.MonadTall(**layout_theme),
     layout.MonadWide(**layout_theme),
     layout.Matrix(**layout_theme),
@@ -243,7 +243,7 @@ def init_widgets():
             background=colors["medium"],
         ),
         widget.TextBox(
-            text=" ",
+            text=" ",
             font="JetBrains Mono Nerd",
             fontsize=16,
             background=colors["medium"],
