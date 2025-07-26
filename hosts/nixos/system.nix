@@ -22,6 +22,11 @@
   services.xserver.desktopManager.xterm.enable = false;
   services.xserver.displayManager.startx.enable = true;
   services.dbus.enable = true;
+
+  # Enable Mchose Web Hub detect keyboard
+  services.udev.extraRules = ''
+  SUBSYSTEM=="usb", ATTR{idVendor}=="41e4", ATTR{idProduct}=="2116", MODE="0666", TAG+="uaccess"
+  '';
   
   #Polkit session agent
   security.polkit.enable = true;
