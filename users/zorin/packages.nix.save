@@ -5,9 +5,9 @@
 with pkgs; [
   home-manager
   unzip
-  protonplus
   vlc
   transmission-gtk
+  protonplus
   p7zip
   google-chrome
   kitty
@@ -45,5 +45,4 @@ with pkgs; [
   hunspell
   hunspellDicts.uk_UA
   hunspellDicts.th_TH
-  discordchatexporter-desktop
 ]

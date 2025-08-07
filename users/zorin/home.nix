@@ -14,10 +14,6 @@
   home.file.".xinitrc".text = ''
   #!/usr/bin/bash
 
-   # Set up XDG paths
-  #export XDG_DATA_DIRS="/run/current-system/sw/share:$${XDG_DATA_DIRS:-/usr/share}"
-  #export XDG_CONFIG_DIRS="/etc/xdg"
-
   # Start Qtile 
   exec qtile start 
   '';
@@ -38,11 +34,22 @@
   home.file.".config/picom/picom.conf" = { 
     source = ../../config/picom/picom.conf;
   };
-  
-  # File definitions (relative to flake root)
-  home.file.".config/ghostty/config" = {
-    source = ../../config/ghostty/config;
-  };
+ 
+
+  #Kitty Terminal 
+  home.file.".config/kitty/kitty.conf".text = ''
+    font_family      FiraCode Nerd Font
+    bold_font        auto
+    italic_font      auto
+    bold_italic_font auto
+    font_size        11.0
+
+    background_opacity 0.90
+    enable_audio_bell no
+    confirm_os_window_close 0
+    window_padding_width 5
+
+   '';
  
   #Starship terminal assistan
   programs.starship.enable = true;
@@ -55,6 +62,21 @@
     '';
   };
 
+  #DuckStation Emulator
+  home.file.".local/bin/duckstation-sync.sh" = {
+    text = ''
+      #!/usr/bin/env bash
+
+      # Launch DuckStation
+      duckstation-qt
+
+      # Sync after quit
+       rsync -av --delete \
+        ~/Games/DuckStation/memcards/ \
+         ~/Dropbox/DuckStation/memcards/
+    '';
+    executable = true;
+  };
 
   #GTK system theme
   dconf.enable = true;

@@ -15,9 +15,9 @@ def autostart():
 home=os.path.expanduser('~')
 mod="mod4" # super key
 alt="mod1"
-myTerm="ghostty"
+myTerm="kitty"
 myBrowser="vivaldi"
-myIDE="ghostty -e nvim"
+myIDE="myTerm -e nvim"
 @lazy.function
 def window_to_prev_group(qtile):
     if qtile.currentWindow is not None:

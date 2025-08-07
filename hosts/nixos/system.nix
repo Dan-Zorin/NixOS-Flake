@@ -2,7 +2,9 @@
  
 {
   imports = [
-    ./hardware.nix
+    ./hardware.nix 
+    ./docker.nix  
+
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -10,6 +12,9 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+  boot.kernelPackages = pkgs.linuxPackages_latest; 
+  boot.kernelParams = [ "nvidia-drm.modeset=1" ];
+  boot.kernelModules = [ "cpufreq_ondemand" "cpufreq_conservative" "cpufreq_userspace" ];
 
   networking.hostName = "nixos";
   time.timeZone = "America/Panama";
@@ -17,19 +22,27 @@
   environment.pathsToLink = [ "/share/xsessions" ];
 
   # Display + X11 settings
-  services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
-  services.xserver.desktopManager.xterm.enable = false;
+  services.xserver = {
+  enable = true;
+  videoDrivers = [ "nvidia" ];
+
+  # Inject custom options into the X11 Device section
+  deviceSection = ''
+    Option "Coolbits" "28"
+  '';
+
+  };
+
   services.xserver.displayManager.startx.enable = true;
   services.dbus.enable = true;
 
   # Enable Mchose Web Hub detect keyboard
   services.udev.extraRules = ''
-  SUBSYSTEM=="usb", ATTR{idVendor}=="41e4", ATTR{idProduct}=="2116", MODE="0666", TAG+="uaccess"
+  KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="41e4", ATTRS{idProduct}=="2116", MODE="0660", GROUP="input", TAG+="uaccess"
   '';
-  
+
   #Polkit session agent
-  security.polkit.enable = true;
+   security.polkit.enable = true;
 
 
   #Daemos services
@@ -59,10 +72,11 @@
 
   users.users.zorin ={
  	isNormalUser = true;
- 	extraGroups = [ "wheel" "video" "input" "tty" ];
+ 	extraGroups = [ "wheel" "video" "input" "tty" "plugdev" "dropbox"];
  	shell = pkgs.fish;
   };
-
+  users.groups.plugdev = { };
+  
   fonts.packages = with pkgs; [
 	font-awesome
 
@@ -79,10 +93,13 @@
 	lxsession
 	xterm
 	dconf
-	git 
-	vim
+	lm_sensors
+ 	git 
+	unrar
+ 	vim
 	libva
   	libvdpau
+	plasma5Packages.kdeconnect-kde
 	pavucontrol
   	vaapiVdpau
   	vdpauinfo
@@ -94,7 +111,6 @@
   	xfce.thunar-media-tags-plugin # media tag editing
  	gvfs                       # auto-mount support
 	linuxKernel.packages.linux_libre.cpupower
-       
   ];
 
   system.stateVersion = "25.05";
