@@ -44,13 +44,6 @@
   #Polkit session agent
    security.polkit.enable = true;
 
-
-  #Daemos services
-  services.emacs = {
-    enable = true;
-    package = pkgs.emacs; # replace with emacs-gtk, or a version provided by the community overlay if desired.
-  };
-
   
   #Qtile Service with Extra Package included
   services.xserver.windowManager.qtile = {
