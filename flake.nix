@@ -20,7 +20,7 @@
       nixosConfigurations.zorin = nixpkgs.lib.nixosSystem {
         inherit system;
         modules = [
-          ./hosts/nixos/system.nix
+          ./Host/nixos/system.nix
 
           home-manager.nixosModules.home-manager
           {

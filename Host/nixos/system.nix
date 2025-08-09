@@ -2,8 +2,14 @@
  
 {
   imports = [
-    ./hardware.nix 
-    ./docker.nix  
+    ./Modules/Audio.nix
+    ./Modules/Gaming.nix
+    ./Modules/Nvidia.nix
+    ./Modules/Qtile.nix
+    ./Modules/Docker.nix
+    ./Modules/Keyboard.nix
+    ./Modules/Network.nix
+    ./Modules/Virtualization.nix  
 
   ];
 
