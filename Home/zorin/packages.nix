@@ -7,7 +7,7 @@ with pkgs; [
   unzip
   protonplus
   vlc
-  transmission-gtk
+  transmission_4-gtk
   p7zip
   google-chrome
   kitty

@@ -26,7 +26,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.zorin = import ./users/zorin/home.nix;
+            home-manager.users.zorin = import ./Home/zorin/home.nix;
           }
         ];
       };
@@ -34,7 +34,7 @@
       # 🧠 Standalone Home Manager
       homeConfigurations.zorin = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        modules = [ ./users/zorin/home.nix ];
+        modules = [ ./Home/zorin/home.nix ];
       };
     };
 }
