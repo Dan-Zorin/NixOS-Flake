@@ -9,9 +9,9 @@
     ./Modules/Docker.nix
     ./Modules/Keyboard.nix
     ./Modules/Network.nix
-    ./Modules/Virtualization.nix
-    ./Modules/ShadowPlay.nix  
-    ./Hardware.nix
+    ./Modules/Virtualization.nix  
+    ./Modules/NvChad.nix
+    ./hardware.nix
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
