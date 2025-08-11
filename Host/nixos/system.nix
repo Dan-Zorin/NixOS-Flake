@@ -9,8 +9,9 @@
     ./Modules/Docker.nix
     ./Modules/Keyboard.nix
     ./Modules/Network.nix
-    ./Modules/Virtualization.nix  
-    ./hardware.nix
+    ./Modules/Virtualization.nix
+    ./Modules/ShadowPlay.nix  
+    ./Hardware.nix
   ];
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
@@ -31,14 +32,12 @@
   enable = true;
   videoDrivers = [ "nvidia" ];
   deviceSection = ''
-    Option "Coolbits" "28"
+    Option "Coolbits" "28" 
   '';
   };
+ 
 
-  # Enable Mchose Web Hub detect keyboard
-  services.udev.extraRules = ''
-  KERNEL=="hidraw*", SUBSYSTEM=="hidraw", ATTRS{idVendor}=="41e4", ATTRS{idProduct}=="2116", MODE="0660", GROUP="input", TAG+="uaccess"
-  '';
+    my.gpuScreenRecorder.enable = true;
 
   # Polkit session agent
    security.polkit.enable = true;
@@ -67,7 +66,7 @@
 	xterm
 	dconf
 	lm_sensors
- 	git 
+ 	git
 	unrar
  	vim
 	libva

@@ -28,6 +28,7 @@ with pkgs; [
   vivaldi-ffmpeg-codecs
   picom
   lmstudio
+   gfn-electron
   gh
   rofi
   xfce.thunar
@@ -35,7 +36,6 @@ with pkgs; [
   fastfetch
   feh
   btop
-  gpu-screen-recorder
   gpu-screen-recorder-gtk
   steam
   bottles

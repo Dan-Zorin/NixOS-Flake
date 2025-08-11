@@ -10,7 +10,7 @@ function run {
 #starting utility applications at boot time
 lxsession &
 xrandr --output HDMI-0 --mode 1920x1080 --primary -r 144 &
-feh --bg-fill .Wallpaper/nord.jpg
+feh --bg-fill .config/qtile/assets/nord.jpg
 picom --config $HOME/.config/picom/picom.conf &
 #run nm-applet &
 #run volumeicon &
