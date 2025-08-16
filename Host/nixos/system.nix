@@ -9,8 +9,8 @@
     ./Modules/Docker.nix
     ./Modules/Keyboard.nix
     ./Modules/Network.nix
-    ./Modules/Virtualization.nix  
-    ./Modules/NvChad.nix
+    ./Modules/Virtualization.nix 
+    ./Modules/Portainer.nix
     ./hardware.nix
   ];
 
@@ -35,9 +35,6 @@
     Option "Coolbits" "28" 
   '';
   };
- 
-
-    my.gpuScreenRecorder.enable = true;
 
   # Polkit session agent
    security.polkit.enable = true;
@@ -64,17 +61,18 @@
   environment.systemPackages = with pkgs;[
 	lxsession
 	xterm
+	wget
 	dconf
 	lm_sensors
- 	git
+ 	perl
+	git	
+        bash
 	unrar
  	vim
 	libva
   	libvdpau
 	plasma5Packages.kdeconnect-kde
 	pavucontrol
-  	vaapiVdpau
-  	vdpauinfo
   	libva-utils
   	vulkan-tools
         xfce.thunar

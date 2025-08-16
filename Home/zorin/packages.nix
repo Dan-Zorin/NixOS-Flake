@@ -5,8 +5,10 @@
 with pkgs; [
   home-manager
   unzip
+  fish
   protonplus
   vlc
+  file
   transmission_4-gtk
   p7zip
   google-chrome
@@ -28,7 +30,7 @@ with pkgs; [
   vivaldi-ffmpeg-codecs
   picom
   lmstudio
-   gfn-electron
+  gfn-electron
   gh
   rofi
   xfce.thunar
