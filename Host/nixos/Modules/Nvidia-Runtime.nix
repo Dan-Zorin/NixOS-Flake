@@ -1,5 +1,5 @@
 # modules/docker-nvidia.nix
-{ config, lib, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 with lib;
 
@@ -18,14 +18,8 @@ in
   config = mkIf config.dockerNvidia.enable {
     environment.systemPackages = [ pkgs.nvidia-container-toolkit ];
 
-    # Create Docker daemon.json with NVIDIA runtime
-    systemd.tmpfiles.rules = [
-      "f /etc/docker/daemon.json 0644 root root -"
-    ];
-
-    systemd.services.docker.preStart = ''
-      mkdir -p /etc/docker
-      cat > /etc/docker/daemon.json <<EOF
+    # Ensure daemon.json exists before Docker starts
+    environment.etc."docker/daemon.json".text = ''
       {
         "runtimes": {
           "nvidia": {
@@ -35,7 +29,7 @@ in
         },
         "default-runtime": "nvidia"
       }
-      EOF
     '';
   };
 }
+

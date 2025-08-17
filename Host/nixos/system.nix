@@ -9,9 +9,8 @@
     ./Modules/Docker.nix
     ./Modules/Keyboard.nix
     ./Modules/Network.nix
-    ./Modules/Virtualization.nix 
-    ./Modules/Portainer.nix
-    ./Modules/Nvidia-Runtime.nix
+    ./Modules/Virtualization.nix
+    ./Modules/Plex.nix
     ./hardware.nix
   ];
 
@@ -28,14 +27,6 @@
 
   environment.pathsToLink = [ "/share/xsessions" ];
 
-
- 
-  # Portainer service manager
-  dockerNvidia.enable = true;
-  services.portainerBE.enable = true;
-  services.portainerBE.licenseKey = "2-0Ji+laklSSFbreKTOTrgoznZKGzTOtmLsjoJSLKP3tY1Jc0JRI64xXS7i6qrIsxlHg1kGlICsbP1rWO9Xs+P1Q==";
-  services.portainerBE.dataDir = "/srv/portainerBE/data";
-  services.portainerBE.ports = [ "9000:9000" ];
   virtualisation.docker.enable = true;
   hardware.nvidia-container-toolkit.enable  = true;
 

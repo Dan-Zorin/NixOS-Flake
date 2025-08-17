@@ -13,6 +13,13 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
+  fileSystems."/media/HDD" = {
+    device = "UUID=c7f78dc9-fbbe-4a10-a60f-022319a9b245";
+    fsType = "btrfs";
+    options = [ "defaults" "noatime" "compress=zstd" ];
+    };
+
+
   fileSystems."/" =
     { device = "/dev/disk/by-uuid/9bca38b9-1978-4a92-a7a6-98018eb721ed";
       fsType = "ext4";

@@ -1,70 +1,71 @@
+# modules/portainer-be-gpu.nix
 { config, pkgs, lib, ... }:
 
 with lib;
 
 let
-  cfg = config.services.portainerBE;
+  nvidiaRuntime = "${pkgs.nvidia-container-toolkit}/bin/nvidia-container-runtime";
 in
-
 {
-  options.services.portainerBE = {
+  options.portainerBE = {
     enable = mkOption {
       type = types.bool;
       default = false;
-      description = "Enable Portainer Business Edition Docker container.";
+      description = "Enable Portainer Business Edition with GPU support.";
     };
-
-    image = mkOption {
-      type = types.str;
-      default = "portainer/portainer-ee:latest";
-      description = "Docker image for Portainer BE.";
-    };
-
     licenseKey = mkOption {
       type = types.str;
       default = "";
-      description = "Portainer BE license key (required).";
     };
-
-    ports = mkOption {
-      type = types.listOf types.str;
-      default = [ "9000:9000" ];
-      description = "Port mappings for Portainer BE.";
-    };
-
     dataDir = mkOption {
       type = types.str;
-      default = "/srv/portainerBE/data";
-      description = "Directory to persist Portainer BE data.";
+      default = "/var/lib/portainer";
+    };
+    ports = mkOption {
+      type = types.listOf types.int;
+      default = [9000 9443 8000];
     };
   };
 
-  config = mkIf cfg.enable {
-    # The module does NOT enable Docker automatically.
-    # User must do:
-    # virtualisation.docker.enable = true;
+  config = mkIf config.portainerBE.enable {
+    # Install NVIDIA container toolkit
+    environment.systemPackages = [ pkgs.nvidia-container-toolkit ];
 
-    # Define a systemd service to run the Docker container
+    # Enable Docker
+    virtualisation.docker.enable = true;
+
+    # Configure daemon.json so containerd sees the NVIDIA runtime
+    environment.etc."docker/daemon.json".text = ''
+      {
+        "runtimes": {
+          "nvidia": {
+            "path": "${nvidiaRuntime}",
+            "runtimeArgs": []
+          }
+        }
+      }
+    '';
+
+    # Systemd service for Portainer BE
     systemd.services.portainerBE = {
-      description = "Portainer Business Edition";
-      wants = [ "docker.service" ];
+      description = "Portainer Business Edition with GPU support";
       after = [ "docker.service" ];
-      serviceConfig = {
-        Restart = "always";
-        ExecStart = ''
-          /run/current-system/sw/bin/docker run \
-            --name portainerBE \
-            -p ${lib.concatStringsSep " -p " cfg.ports} \
-            -v /var/run/docker.sock:/var/run/docker.sock \
-            -v ${cfg.dataDir}:/data \
-            -e PORTAINER_EDITION=business \
-            -e LICENSE_KEY=${cfg.licenseKey} \
-            ${cfg.image}
-        '';
-        ExecStop = "/run/current-system/sw/bin/docker stop portainerBE || true";
-        ExecStopPost = "/run/current-system/sw/bin/docker rm portainerBE || true";
-      };
-      wantedBy = [ "multi-user.target" ];
+      wants = [ "docker.service" ];
+      serviceConfig.Type = "simple";
+      serviceConfig.ExecStart = ''
+        ${pkgs.docker}/bin/docker run \
+          --rm \
+          --name portainerBE \
+          --gpus all \
+          -p ${lib.concatStringsSep " -p " (map toString config.portainerBE.ports)} \
+          -v /var/run/docker.sock:/var/run/docker.sock \
+          -v ${config.portainerBE.dataDir}:/data \
+          -e PORTAINER_EDITION=business \
+          -e LICENSE_KEY=${config.portainerBE.licenseKey} \
+          portainer/portainer-ee:latest
+      '';
+      serviceConfig.Restart = "always";
     };
   };
 }
+
