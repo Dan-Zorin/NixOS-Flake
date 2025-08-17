@@ -1,51 +1,70 @@
 { config, pkgs, lib, ... }:
 
+with lib;
+
 let
-  cfg = config.services.portainer;
-in {
-  options.services.portainer = {
-    enable = lib.mkEnableOption "Portainer Business Edition";
-    licenseKey = lib.mkOption {
-      type = lib.types.str;
-      description = "Portainer Business license key";
+  cfg = config.services.portainerBE;
+in
+
+{
+  options.services.portainerBE = {
+    enable = mkOption {
+      type = types.bool;
+      default = false;
+      description = "Enable Portainer Business Edition Docker container.";
     };
-    dataDir = lib.mkOption {
-      type = lib.types.path;
-      default = "/var/lib/portainer";
-      description = "Storage path for Portainer data";
+
+    image = mkOption {
+      type = types.str;
+      default = "portainer/portainer-ee:latest";
+      description = "Docker image for Portainer BE.";
+    };
+
+    licenseKey = mkOption {
+      type = types.str;
+      default = "";
+      description = "Portainer BE license key (required).";
+    };
+
+    ports = mkOption {
+      type = types.listOf types.str;
+      default = [ "9000:9000" ];
+      description = "Port mappings for Portainer BE.";
+    };
+
+    dataDir = mkOption {
+      type = types.str;
+      default = "/srv/portainerBE/data";
+      description = "Directory to persist Portainer BE data.";
     };
   };
 
-  config = lib.mkIf cfg.enable {
-    virtualisation.docker.enable = true;
+  config = mkIf cfg.enable {
+    # The module does NOT enable Docker automatically.
+    # User must do:
+    # virtualisation.docker.enable = true;
 
-    virtualisation.oci-containers.containers.portainer = {
-      image = "portainer/portainer-ee:latest";
-      environment = {
-        PORTAINER_LICENSE_KEY = cfg.licenseKey;
+    # Define a systemd service to run the Docker container
+    systemd.services.portainerBE = {
+      description = "Portainer Business Edition";
+      wants = [ "docker.service" ];
+      after = [ "docker.service" ];
+      serviceConfig = {
+        Restart = "always";
+        ExecStart = ''
+          /run/current-system/sw/bin/docker run \
+            --name portainerBE \
+            -p ${lib.concatStringsSep " -p " cfg.ports} \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            -v ${cfg.dataDir}:/data \
+            -e PORTAINER_EDITION=business \
+            -e LICENSE_KEY=${cfg.licenseKey} \
+            ${cfg.image}
+        '';
+        ExecStop = "/run/current-system/sw/bin/docker stop portainerBE || true";
+        ExecStopPost = "/run/current-system/sw/bin/docker rm portainerBE || true";
       };
-      volumes = [
-        "${cfg.dataDir}:/data"
-        "/var/run/docker.sock:/var/run/docker.sock"
-      ];
-      ports = [
-        "9000:9000"
-        "8000:8000"  # Edge agent port
-      ];
-      extraOptions = [ "--pull=always" ];
+      wantedBy = [ "multi-user.target" ];
     };
-
-    systemd.services.portainer-setup = {
-      description = "Portainer initialization";
-      wantedBy = [ "portainer.service" ];
-      before = [ "portainer.service" ];
-      serviceConfig.Type = "oneshot";
-      script = ''
-        mkdir -p ${cfg.dataDir}
-        chmod 700 ${cfg.dataDir}
-      '';
-    };
-
-    networking.firewall.allowedTCPPorts = [ 9000 8000 ];
   };
 }

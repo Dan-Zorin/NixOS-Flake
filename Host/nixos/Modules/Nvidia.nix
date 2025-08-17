@@ -20,6 +20,14 @@
      ];
    };
 
+  # Enable the NVIDIA Container Toolkit for CDI support
+  hardware.nvidia-container-toolkit.enable = true;
+  
+  virtualisation.docker.extraOptions = ''
+  --add-runtime=nvidia=/run/current-system/sw/bin/nvidia-container-runtime
+  --default-runtime=nvidia
+  '';
+
   #Nvidia Hardware environment variables
   environment.sessionVariables = {
         LIBVA_DRIVER_NAME = "nvidia";
