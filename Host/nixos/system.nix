@@ -10,7 +10,7 @@
     ./Modules/Keyboard.nix
     ./Modules/Network.nix
     ./Modules/Virtualization.nix
-    ./Modules/Plex.nix
+    ./Modules/PlexDocker.nix
     ./hardware.nix
   ];
 
