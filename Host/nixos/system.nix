@@ -11,6 +11,7 @@
     ./Modules/Network.nix
     ./Modules/Virtualization.nix
     ./Modules/PlexDocker.nix
+    ./Modules/Tmux.nix
     ./hardware.nix
   ];
 
@@ -50,6 +51,7 @@
   #Allow Shell To Operate
   programs.fish.enable = true;
 
+  #Users Zorin
   users.users.zorin ={
  	isNormalUser = true;
  	extraGroups = [ "wheel" "video" "input" "tty" "plugdev" "dropbox"];

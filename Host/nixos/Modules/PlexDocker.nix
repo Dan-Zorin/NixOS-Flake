@@ -1,31 +1,30 @@
 { config, pkgs, lib, ... }:
 
 let
-  dockerDir = "/etc/nixos/docker/plex";
+  dockerDir = "/etc/nixos/docker/jellyfin";
 in
 {
   # Write docker-compose.yml declaratively
-  environment.etc."nixos/docker/plex/docker-compose.yml".text = ''
+  environment.etc."nixos/docker/jellyfin/docker-compose.yml".text = ''
     version: "3.9"
     services:
-      plex:
-        image: lscr.io/linuxserver/plex:latest
-        container_name: plex
+      jellyfin:
+        image: jellyfin/jellyfin:latest
+        container_name: jellyfinDocker
         network_mode: host
         environment:
           - PUID=1000
           - PGID=100
-          - VERSION=docker
         volumes:
-          - /var/lib/plex:/config
+          - /var/lib/jellyfin:/config
           - /media/HDD/Movies:/movies
           - /media/HDD/TVShows:/tv
         restart: unless-stopped
   '';
 
   # Systemd unit to run docker compose
-  systemd.services."plex-docker" = {
-    description = "Plex Media Server (Docker Compose)";
+  systemd.services."jellyfin-docker" = {
+    description = "Jellyfin Media Server (Docker Compose)";
     after = [ "docker.service" "network.target" ];
     requires = [ "docker.service" ];
 
@@ -38,4 +37,9 @@ in
 
     wantedBy = [ "multi-user.target" ];
   };
+
+  # Ensure Docker is available
+  environment.systemPackages = [ pkgs.docker pkgs.docker-compose pkgs.nvidia-container-toolkit ];
+  virtualisation.docker.enable = true;
 }
+

@@ -38,16 +38,26 @@
 
   #Kitty Terminal 
   home.file.".config/kitty/kitty.conf".text = ''
-    font_family      FiraCode Nerd Font
-    bold_font        auto
-    italic_font      auto
-    bold_italic_font auto
-    font_size        11.0
+    # BEGIN_KITTY_THEME
+# Solarized Osaka
+include current-theme.conf
+# END_KITTY_THEME
 
-    background_opacity 0.90
-    enable_audio_bell no
-    confirm_os_window_close 0
-    window_padding_width 5
+font_family FiraCode Nerd Font Mono Light
+font_size 8
+bold_font        auto
+italic_font      auto
+bold_italic_font auto
+
+
+background_opacity 0.10
+background_blur 30
+
+
+macos_show_window_title_in none
+macos_titlebar_color #1a1b26
+macos_menubar_title_max_length 0
+hide_window_decorations titlebar-only
 
    '';
  
