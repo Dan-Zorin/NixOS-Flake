@@ -11,7 +11,7 @@
     ./Modules/Network.nix
     ./Modules/Virtualization.nix
     ./Modules/PlexDocker.nix
-    ./Modules/Tmux.nix
+    ./Modules/Nvchad.nix
     ./hardware.nix
   ];
 
@@ -30,6 +30,16 @@
 
   virtualisation.docker.enable = true;
   hardware.nvidia-container-toolkit.enable  = true;
+
+  # Nvchad Text Editor
+  modules.nvchad = {
+    enable = true;
+    extraPlugins = with pkgs.vimPlugins; [
+      telescope-nvim
+      nvim-tree-lua
+      gitsigns-nvim
+     ];
+   };
 
   # Enable Xorg Server and Coolbits for  power  management
   services.xserver = {

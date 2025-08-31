@@ -5,6 +5,7 @@
 with pkgs; [
   home-manager
   unzip
+  neovim
   fish
   protonplus
   vlc
