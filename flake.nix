@@ -21,8 +21,7 @@
         inherit system;
         modules = [
           ./Host/nixos/system.nix
-	  ./Home/zorin/Modules/Nvchad.nix
-
+	  
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
