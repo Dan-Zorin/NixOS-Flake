@@ -11,7 +11,6 @@
     ./Modules/Network.nix
     ./Modules/Virtualization.nix
     ./Modules/PlexDocker.nix
-    ./Modules/Nvchad.nix
     ./hardware.nix
   ];
 
