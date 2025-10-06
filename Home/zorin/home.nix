@@ -63,14 +63,6 @@ hide_window_decorations titlebar-only
  
   #Starship terminal assistan
   programs.starship.enable = true;
-  
-  programs.emacs = {
-    enable = true;
-    package = pkgs.emacs;
-    extraConfig = ''
-      (setq standard-indent 2)
-    '';
-  };
 
   #DuckStation Emulator
   home.file.".local/bin/duckstation-sync.sh" = {

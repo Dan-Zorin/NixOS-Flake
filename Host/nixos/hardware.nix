@@ -13,44 +13,52 @@
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-  fileSystems."/" =
-    { device = "/dev/disk/by-uuid/41e4759a-970b-4fd3-9db3-e105716df820";
-      fsType = "btrfs";
-      options = [ "subvol=@""compress=zstd" "noatime" ];
-    };
+  # EFI Boot Partition
+fileSystems."/boot" = {
+  device = "/dev/disk/by-uuid/AEBA-E8F0"; # sdd1, vfat EFI
+  fsType = "vfat";
+};
 
-  fileSystems."/home" =
-    { device = "/dev/disk/by-uuid/41e4759a-970b-4fd3-9db3-e105716df820";
-      fsType = "btrfs";
-      options = [ "subvol=@home""compress=zstd" "noatime" ];
-    };
+# Root Btrfs Partition
+fileSystems."/" = {
+  device = "/dev/disk/by-uuid/36bf77aa-a0b6-45f1-8309-6ea080605f8d"; # sdd2, Btrfs
+  fsType = "btrfs";
+  options = [ "subvol=@" "ssd" "discard=async" "space_cache=v2" ];
+};
 
-  fileSystems."/nix" =
-    { device = "/dev/disk/by-uuid/41e4759a-970b-4fd3-9db3-e105716df820";
-      fsType = "btrfs";
-      options = [ "subvol=@nix""compress=zstd" "noatime" ];
-    };
+# Home subvolume
+fileSystems."/home" = {
+  device = "/dev/disk/by-uuid/36bf77aa-a0b6-45f1-8309-6ea080605f8d";
+  fsType = "btrfs";
+  options = [ "subvol=@home" "ssd" "discard=async" "space_cache=v2" ];
+};
 
-  fileSystems."/var" =
-    { device = "/dev/disk/by-uuid/41e4759a-970b-4fd3-9db3-e105716df820";
-      fsType = "btrfs";
-      options = [ "subvol=@var""compress=zstd" "noatime" ];
-    };
+# Nix subvolume
+fileSystems."/nix" = {
+  device = "/dev/disk/by-uuid/36bf77aa-a0b6-45f1-8309-6ea080605f8d";
+  fsType = "btrfs";
+  options = [ "subvol=@nix" "ssd" "discard=async" "space_cache=v2" ];
+};
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/4874-48A7";
-      fsType = "vfat";
-      options = [ "fmask=0022" "dmask=0022" ];
-    };
+# Var subvolume
+fileSystems."/var" = {
+  device = "/dev/disk/by-uuid/36bf77aa-a0b6-45f1-8309-6ea080605f8d";
+  fsType = "btrfs";
+  options = [ "subvol=@var" "ssd" "discard=async" "space_cache=v2" ];
+};
 
-   fileSystems."/media/HDD" = {
-       device = "UUID=c7f78dc9-fbbe-4a10-a60f-022319a9b245";
-      fsType = "btrfs";
-       options = [ "defaults" "noatime" "compress=zstd" ];
-    };
- 
+# Snapshots subvolume
+fileSystems."/ .snapshots" = {
+  device = "/dev/disk/by-uuid/36bf77aa-a0b6-45f1-8309-6ea080605f8d";
+  fsType = "btrfs";
+  options = [ "subvol=@snapshots" "ssd" "discard=async" "space_cache=v2" ];
+};
 
-  swapDevices = [ ];
+# Swap
+swapDevices = [
+  { device = "/dev/disk/by-uuid/10da0edb-b5d9-4a91-bd94-957c8a43f62e"; }
+];
+
 
   # Enables DHCP on each ethernet and wireless interface. In case of scripted networking
   # (the default) this is the recommended approach. When using systemd-networkd it's

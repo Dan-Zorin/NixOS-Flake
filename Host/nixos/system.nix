@@ -1,4 +1,4 @@
-{ config, pkgs, ...}:
+{ config, pkgs, unstable, ...}:
  
 {
   imports = [
@@ -19,8 +19,8 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
-  boot.kernelPackages = pkgs.linuxPackages_latest;
-  boot.kernelModules = [ "cpufreq_ondemand" "cpufreq_conservative" "cpufreq_userspace" ];
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+  boot.kernelModules = [  "nct6775" "coretemp" ];
 
   networking.hostName = "nixos";
   time.timeZone = "America/Panama";
@@ -42,6 +42,15 @@
   # Polkit session agent
    security.polkit.enable = true;
 
+  services.openssh = {
+  enable = true;
+  settings = {
+    PermitRootLogin = "no";
+    PasswordAuthentication = true;
+  };
+};
+
+networking.firewall.allowedTCPPorts = [ 22 ];
 
   #Thunar plugins 
   services.gvfs.enable = true;
@@ -69,10 +78,12 @@
 	wget
 	dconf
 	lm_sensors
- 	nvidia-container-toolkit
+	clang
 	perl
 	git	
-        bash
+	bash
+	lm_sensors
+  	fanctl
 	unrar
  	vim
 	nvidia-container-toolkit
@@ -86,8 +97,7 @@
   	xfce.thunar-volman 
   	xfce.thunar-archive-plugin 
   	xfce.thunar-media-tags-plugin
- 	gvfs                       
-	linuxKernel.packages.linux_libre.cpupower
+ 	gvfs
   ];
 
   system.stateVersion = "25.05";

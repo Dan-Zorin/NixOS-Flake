@@ -5,9 +5,11 @@
 with pkgs; [
   home-manager
   unzip
+  strawberry
   neovim
   fish
   protonplus
+  protontricks
   vlc
   file
   transmission_4-gtk
@@ -27,6 +29,7 @@ with pkgs; [
   mangohud
   curl
   dunst
+  heroic
   vivaldi
   vivaldi-ffmpeg-codecs
   picom
