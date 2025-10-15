@@ -11,6 +11,7 @@
     ./Modules/Network.nix
     ./Modules/Virtualization.nix
     ./Modules/PlexDocker.nix
+    ./Winapp.nix
     ./hardware.nix
   ];
 
@@ -19,6 +20,7 @@
 
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
+
   boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
   boot.kernelModules = [  "nct6775" "coretemp" ];
 
@@ -26,9 +28,6 @@
   time.timeZone = "America/Panama";
 
   environment.pathsToLink = [ "/share/xsessions" ];
-
-  virtualisation.docker.enable = true;
-  hardware.nvidia-container-toolkit.enable  = true;
 
   # Enable Xorg Server and Coolbits for  power  management
   services.xserver = {

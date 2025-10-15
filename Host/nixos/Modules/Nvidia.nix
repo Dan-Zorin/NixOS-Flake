@@ -8,8 +8,7 @@
     powerManagement.finegrained = false;
     open = false;
     nvidiaSettings = true;	 
-    package = unstable.linuxPackages.nvidiaPackages.latest;
-    # package = config.boot.kernelPackages.nvidiaPackages.latest;   
+    package = config.boot.kernelPackages.nvidiaPackages.production;   
   };
 
   hardware.graphics = {
