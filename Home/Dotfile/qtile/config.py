@@ -17,7 +17,7 @@ mod="mod4" # super key
 alt="mod1"
 myTerm="kitty"
 myBrowser="vivaldi"
-myIDE="myTerm -e nvim"
+myIDE="myTerm nvim"
 @lazy.function
 def window_to_prev_group(qtile):
     if qtile.currentWindow is not None:
@@ -34,9 +34,10 @@ keys = [
 # SUPER + FUNCTION KEYS
     Key([alt], "1", lazy.spawn(myBrowser)),
     Key([alt], "2", lazy.spawn(myIDE)),
-    Key([alt], "3", lazy.spawn("strawberry")),
-    Key([alt], "4", lazy.spawn("gamescope -W 1920 -H 1080 -r 144 -f steam")),
+    Key([alt], "3", lazy.spawn("neovide")),
+    Key([alt], "4", lazy.spawn("strawberry")),
     Key([alt], "5", lazy.spawn("discord")),
+    Key([alt], "6", lazy.spawn("gamescope -W 1920 -H 1080 -r 144 -f steam")),
 # SUPER + ... KEYS
     Key([mod], "v", lazy.spawn("rofi -show drun")),
     Key([mod], "b", lazy.spawn("pcmanfm")),
@@ -110,7 +111,7 @@ layouts=[
 # WIDGETS FOR THE BAR
 def init_widgets_defaults():
     return dict(
-        font="IBM Plex Mono",
+        font="JetBrains Mono Nerd",
         fontsize=14,
         padding=3,
     )
@@ -312,14 +313,12 @@ def init_widgets():
     ]
     return widgets
 
-screen1_widgets=init_widgets()
-screen2_widgets=init_widgets()
+    screen1_widgets=init_widgets()
+#    screen2_widgets=init_widgets()
 
-screens=[
-    Screen(top=bar.Bar(widgets=init_widgets(), size=30, opacity=1, margin=[10, 15, -3, 15])),
-    Screen(top=bar.Bar(widgets=init_widgets(), size=30, opacity=1, margin=[10, 15, -3, 15])),
-    ]
-             
+screens=[Screen(top=bar.Bar(widgets=init_widgets(), size=30, opacity=1, margin=[5, 5, -3, 5])),
+         #screens=[Screens(top=bar.Bar(widget=init_widgets(), size=30, opacity=1, margin=[10 ,15, -3, 15])),
+         ]
 
 
 # MOUSE CONFIGURATION

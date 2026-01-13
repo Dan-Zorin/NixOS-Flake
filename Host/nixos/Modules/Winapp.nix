@@ -1,38 +1,55 @@
 { config, pkgs, lib, ... }:
 
 {
-  options.winapps.enable = lib.mkEnableOption "Windows App virtualization";
+  options.winapp.enable = lib.mkOption {
+    type = lib.types.bool;
+    default = false;
+    description = "Enable Windows VM for Winapps (e.g. Dragon City, Office, etc)";
+  };
 
-  config = lib.mkIf config.winapps.enable {
-    # Make sure libvirt and QEMU are running
-    services.libvirtd.enable = true;
+  config = lib.mkIf config.winapp.enable {
 
-    # Auto-start SPICE agent for clipboard, etc.
-    services.spice-vdagentd.enable = true;
+    # --- Virtualization Base ---
+    virtualisation = {
+      libvirtd = {
+        enable = true;
+        qemu = {
+          package = lib.mkDefault pkgs.qemu_kvm; # no conflicts
+          swtpm.enable = true;
+        };
+      };
 
+      spiceUSBRedirection.enable = true;
+    };
+
+    # --- Packages for Virtualization + Winapps ---
     environment.systemPackages = with pkgs; [
+      virt-manager
       spice
       spice-gtk
       spice-vdagent
-      virt-manager
-      winapps
+      virtio-win
+      virglrenderer
+      winetricks
+      wineWowPackages.stableFull
+      qemu
     ];
 
-    # Optional: firewall tweaks for local SPICE
-    networking.firewall.allowedTCPPorts = [ 5900 5901 5902 ];
-    networking.firewall.allowedUDPPorts = [ 5900 5901 5902 ];
+    # --- User Permissions ---
+    users.users.zorin.extraGroups = [ "libvirtd" "kvm" "qemu-libvirtd" ];
 
-    # Declare VM storage and GPU options
-    virtualisation.libvirtd.qemu.verbatimConfig = ''
-      nvram = [
-        "/run/libvirt/nix-ovmf/OVMF_CODE.fd:/run/libvirt/nix-ovmf/OVMF_VARS.fd"
-      ]
-    '';
+    # --- Optional networking setup for VMs ---
+    networking.firewall.allowedTCPPorts = [ 5900 5901 3389 ];
+    networking.firewall.allowedUDPPorts = [ 5900 5901 ];
 
-    virtualisation.libvirtd.qemu.extraConfig = ''
-      # Enable virglrenderer for 3D acceleration
-      display = "spice,gl=on"
-      video = "virtio"
+    # --- Optional Winapp setup path (for future automation) ---
+    environment.etc."winapp/config".text = ''
+      [vm]
+      name = "Winapp"
+      image = "/var/lib/libvirt/images/winapp.qcow2"
+      ram = 8192
+      cores = 6
     '';
   };
 }
+

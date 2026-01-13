@@ -23,35 +23,35 @@ fileSystems."/boot" = {
 fileSystems."/" = {
   device = "/dev/disk/by-uuid/36bf77aa-a0b6-45f1-8309-6ea080605f8d"; # sdd2, Btrfs
   fsType = "btrfs";
-  options = [ "subvol=@" "ssd" "discard=async" "space_cache=v2" ];
+  options = [ "subvol=@" "ssd" "discard=async" "space_cache=v2"];
 };
 
 # Home subvolume
 fileSystems."/home" = {
   device = "/dev/disk/by-uuid/36bf77aa-a0b6-45f1-8309-6ea080605f8d";
   fsType = "btrfs";
-  options = [ "subvol=@home" "ssd" "discard=async" "space_cache=v2" ];
+  options = [ "subvol=@home" "ssd" "discard=async" "space_cache=v2"];
 };
 
 # Nix subvolume
 fileSystems."/nix" = {
   device = "/dev/disk/by-uuid/36bf77aa-a0b6-45f1-8309-6ea080605f8d";
   fsType = "btrfs";
-  options = [ "subvol=@nix" "ssd" "discard=async" "space_cache=v2" ];
+  options = [ "subvol=@nix" "ssd" "discard=async" "space_cache=v2"];
 };
 
 # Var subvolume
 fileSystems."/var" = {
   device = "/dev/disk/by-uuid/36bf77aa-a0b6-45f1-8309-6ea080605f8d";
   fsType = "btrfs";
-  options = [ "subvol=@var" "ssd" "discard=async" "space_cache=v2" ];
+  options = [ "subvol=@var" "ssd" "discard=async" "space_cache=v2"];
 };
 
 # Snapshots subvolume
-fileSystems."/ .snapshots" = {
+fileSystems."/.snapshots" = {
   device = "/dev/disk/by-uuid/36bf77aa-a0b6-45f1-8309-6ea080605f8d";
   fsType = "btrfs";
-  options = [ "subvol=@snapshots" "ssd" "discard=async" "space_cache=v2" ];
+  options = [ "subvol=@snapshots" "ssd" "discard=async" "space_cache=v2"];
 };
 
 # Swap

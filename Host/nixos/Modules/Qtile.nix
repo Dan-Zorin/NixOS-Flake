@@ -10,8 +10,12 @@
 	];
 	};
 
-#Startx Service Fallback
+#etartx Service Fallback
 services.xserver.displayManager.startx.enable = true;
 services.dbus.enable = true;
-
+services.xserver.displayManager.sddm = {
+  enable = true;
+#  autoLogin.enable = true;
+#  autoLogin.enable = "zorin";
+};
 }

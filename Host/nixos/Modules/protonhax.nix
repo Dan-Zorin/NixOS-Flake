@@ -8,7 +8,7 @@ let
     src = pkgs.fetchgit {
       url = "https://github.com/jcnils/protonhax";
       rev = "922a7bbade5a93232b3152cc20a7d8422db09c31";
-      sha256 = "sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA="; # fill after first build
+      sha256 = "sha256-P6DVRz8YUF4JY2tiEVZx16FtK4i/rirRdKKZBslbJxU=";
     };
 
     installPhase = ''

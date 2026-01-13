@@ -10,5 +10,14 @@
 
   environment.systemPackages = with pkgs; [
     docker-compose
+    waydroid
   ];
+
+
+  # Enable Waydroid
+  virtualisation.waydroid.enable = true;
+
+    networking.nftables.enable = true;
+  networking.firewall.enable = true;
+
 }

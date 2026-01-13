@@ -4,8 +4,13 @@
 #Home User Packages 
 with pkgs; [
   home-manager
+  themechanger
   unzip
+  neovide
+  betterdiscordctl
+  discord
   strawberry
+  gst_all_1.gst-plugins-rs
   neovim
   fish
   protonplus
@@ -21,22 +26,16 @@ with pkgs; [
   vesktop
   mpv
   noto-fonts-color-emoji
-  duckstation
   usbutils
-  easyeffects
-  flameshot 
+  easyeffects 
   mangojuice
   mangohud
   curl
-  dunst
   heroic
   vivaldi
   vivaldi-ffmpeg-codecs
   picom
-  lmstudio
-  gfn-electron
   gh
-  rofi
   xfce.thunar
   dropbox-cli 
   fastfetch
