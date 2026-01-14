@@ -26,17 +26,17 @@
   '';
    };
   
-  # Import entire qtile config folder
+  # Import entire Hyprland config folder
   home.file.".config/hypr" = {
     source = ../../Home/Dotfile/hypr;
     recursive = true;
   };
 
   #Picom Window compositor
-  home.file.".config/picom/picom.conf" = { 
+  home.file.".config/picom/picom.conf" = {
     source = ../../config/picom/picom.conf;
   };
- 
+
 
   #Kitty Terminal 
   home.file.".config/kitty/kitty.conf".text = ''
