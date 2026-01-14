@@ -6,7 +6,7 @@
     ./Modules/Gaming.nix
     ./Modules/Nvidia.nix
     ./Modules/Qtile.nix
-    ./Modules/Docker.nix
+    ./Modules/Podman.nix
     ./Modules/Keyboard.nix
     ./Modules/Network.nix
     ./Modules/Winapp.nix
