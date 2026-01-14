@@ -7,13 +7,10 @@
     pkgs.waybar
     pkgs.wlr-randr
     pkgs.wlroots
-    pkgs.mako
-    pkgs.wofi
     pkgs.quickshell
     pkgs.jq
     pkgs.dunst
     pkgs.flameshot
-    pkgs.grim
     pkgs.rofi
     pkgs.slurp
   ];
