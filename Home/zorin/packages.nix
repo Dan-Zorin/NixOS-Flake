@@ -6,7 +6,6 @@ with pkgs; [
   home-manager
   themechanger
   unzip
-  neovide
   betterdiscordctl
   discord
   strawberry
@@ -23,11 +22,9 @@ with pkgs; [
   kitty
   zulu17
   gnome-disk-utility
-  vesktop
   mpv
   noto-fonts-color-emoji
   usbutils
-  easyeffects 
   mangojuice
   mangohud
   curl
@@ -51,4 +48,5 @@ with pkgs; [
   hunspellDicts.uk_UA
   hunspellDicts.th_TH
   discordchatexporter-desktop
+  blockbench
 ]
