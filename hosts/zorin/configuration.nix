@@ -1,163 +1,131 @@
-{ config, pkgs, unstable, ...}:
- 
+{ config, pkgs, ... }:
+
 {
   imports = [
-    ./Modules/Audio.nix
-    ./Modules/Gaming.nix
-    ./Modules/Nvidia.nix
-    ./Modules/Qtile.nix
-    ./Modules/Podman.nix
-    ./Modules/Keyboard.nix
-    ./Modules/Network.nix
-    ./Modules/Winapp.nix
-    ./Modules/KdeApp.nix
-    ./Modules/protonhax.nix
-    ./Modules/Hyprland.nix
-    ./hardware.nix
+    # Hardware configuration
+    ./hardware-configuration.nix
+
+    # System modules
+    ./modules/boot.nix
+    ./modules/networking.nix
+    ./modules/services.nix
+    ./modules/virtualization.nix
   ];
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ];
-  nixpkgs.config.allowUnfree = true;
+  # ==========================================
+  # System Settings
+  # ==========================================
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  # Hostname
+  networking.hostName = "zorin";
 
-  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
-  boot.kernelModules = [ "ntsync" "nct6774" "coretemp" ];
-  boot.extraModulePackages = with config.boot.kernelPackages; [ ];
-  boot.blacklistedKernelModules = [ "nouveau" "nvidiafb" ];
-
-
-  services.protonhax.enable = true;
-  hardware.steam-hardware.enable = true;
-  services.udev.packages = [
-  pkgs.game-devices-udev-rules
-  ];
-  
-
-  networking.hostName = "nixos";
+  # Timezone
   time.timeZone = "America/Panama";
 
-  environment.pathsToLink = [ "/share/xsessions" ];
-
-   programs.coolercontrol.enable = true;
-
-  # Enable Virtual Machine Manager With Support
-  winapp.enable = true;
-
-  # Enable Xorg Server and Coolbits for  power  management
-  services.xserver = {
-  enable = true;
-  videoDrivers = [ "nvidia" ];
-  deviceSection = ''
-    Option "Coolbits" "28"
-    Option "ModeDebug" "true"
-    Option "UseEdidDpi" "false"
-    Option "ModeValidation" "AllowNonEdidModes"
-    Option "ExactModeTimingsDVI" "True"
-
-  '';
+  # Locale
+  i18n.defaultLocale = "en_US.UTF-8";
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "en_US.UTF-8";
+    LC_IDENTIFICATION = "en_US.UTF-8";
+    LC_MEASUREMENT = "en_US.UTF-8";
+    LC_MONETARY = "en_US.UTF-8";
+    LC_NAME = "en_US.UTF-8";
+    LC_NUMERIC = "en_US.UTF-8";
+    LC_PAPER = "en_US.UTF-8";
+    LC_TELEPHONE = "en_US.UTF-8";
+    LC_TIME = "en_US.UTF-8";
   };
 
-  # Polkit session agent.
-   security.polkit.enable = true;
-  
+  # Console keymap
+  console.keyMap = "us";
 
-  # Open SSH service.
-  services.openssh = {
-  enable = true;
-  settings = {
-    PermitRootLogin = "no";
-    PasswordAuthentication = true;
-     };
+  # ==========================================
+  # Display/Graphics
+  # ==========================================
+
+  # Enable Hyprland
+  programs.hyprland = {
+    enable = true;
+    xwayland.enable = true;
   };
 
-  networking.firewall.allowedTCPPorts = [ 22 ];
+  # XDG Desktop Portal
+  xdg.portal = {
+    enable = true;
+    extraPortals = [
+      pkgs.xdg-desktop-portal-gtk
+      pkgs.xdg-desktop-portal-hyprland
+    ];
+    config.common.default = "*";
+  };
 
-  #Thunar plugins 
-  services.gvfs.enable = true;
-  services.tumbler.enable = true;
+  # OpenGL/Graphics
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true;
+  };
 
-  #Allow Shell To Operate
+  # ==========================================
+  # User Account
+  # ==========================================
+
+  users.users.zorin = {
+    isNormalUser = true;
+    description = "Dan Zorin";
+    extraGroups = [
+      "wheel"           # sudo access
+      "networkmanager"  # network management
+      "video"           # video devices
+      "audio"           # audio devices
+      "libvirtd"        # VMs
+      "podman"          # containers
+    ];
+    shell = pkgs.fish;
+  };
+
+  # Enable fish system-wide
   programs.fish.enable = true;
 
-  #Users Zorin
-  users.users.zorin ={
- 	isNormalUser = true;
- 	extraGroups = [ "wheel" "video" "input" "tty" "plugdev" "dropbox"];
- 	shell = pkgs.fish;
-  };
-  users.groups.plugdev = { };
-  
-  fonts.packages = with pkgs; [
-  nerd-fonts.blex-mono
+  # ==========================================
+  # System Packages (keep minimal!)
+  # ==========================================
+
+  environment.systemPackages = with pkgs; [
+    # Essential tools only
+    vim
+    git
+    wget
+    curl
+    htop
+
+    # For Wayland/Hyprland
+    wayland
+    xwayland
+
+    # Qt styling for Wayland
+    qt5.qtwayland
+    qt6.qtwayland
+    libsForQt5.qt5ct
   ];
 
-  systemd.services.librespot = {
-  wantedBy = [ "multi-user.target" ];
-  description = "Spotify Connect daemon";
-  serviceConfig = {
-    ExecStart = "${pkgs.librespot}/bin/librespot \
-      --name 'Strawberry Connect' \
-      --backend alsa \
-      --device default \
-      --bitrate 320 \
-      --enable-volume-normalisation true"; 
-    Restart = "always";
+  # Qt theming
+  environment.sessionVariables = {
+    QT_QPA_PLATFORMTHEME = "qt5ct";
   };
-};
 
+  # ==========================================
+  # Security & Permissions
+  # ==========================================
 
-  environment.systemPackages = with pkgs;[
-  jetbrains.idea-community
-  jdk17
-  linuxKernel.packages.linux_xanmod_latest.cpupower
-  gst_all_1.gstreamer
-  gst_all_1.gst-plugins-base
-  gst_all_1.gst-plugins-good
-  gst_all_1.gst-plugins-bad
-  gst_all_1.gst-plugins-ugly
-  gst_all_1.gst-libav
-  rustdesk-flutter
-  ibm-plex
-  nautilus
-  xorg.xkill
-  protontricks
-  duckstation
-  docker
-  gamemode
-  lxsession
-  gst_all_1.gst-plugins-rs
-  libxcvt
-  xterm
-	lact
-	wget
-	dconf
-	waydroid
-	lm_sensors
-	clang
-	perl
-	git	
-	bash
-	librespot
-  lm_sensors
-  tree
-  fanctl
-	unrar
-	vim
-	nvidia-container-toolkit
-	libva
-	libvdpau
-  kdePackages.kdeconnect-kde
-	pavucontrol
-	libva-utils
-  vulkan-tools
-  xfce.thunar
-  xfce.thunar-volman 
-  xfce.thunar-archive-plugin 
-  xfce.thunar-media-tags-plugin
-  gvfs
-  ];
+  # Sudo settings
+  security.sudo.wheelNeedsPassword = true;
 
-  system.stateVersion = "25.05";
+  # Polkit (already in services.nix, but ensuring it's here)
+  security.polkit.enable = true;
+
+  # ==========================================
+  # System Version
+  # ==========================================
+
+  system.stateVersion = "25.11";
 }

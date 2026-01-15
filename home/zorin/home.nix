@@ -9,7 +9,7 @@
   imports = [
     # Desktop environment
     ./desktop/hyprland.nix
-    ./desktop/waybar.nix
+    ./desktop/quickshell.nix
     ./desktop/theme.nix
 
     # Shell & terminal
