@@ -22,26 +22,27 @@
       # ------------------------------
       nixosConfigurations.zorin = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = {
-        };
-
         modules = [
-          ./Host/nixos/system.nix
+          # Main system configuration
+          ./hosts/zorin/configuration.nix
 
+          # Home Manager integration
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.users.zorin = import ./Home/zorin/home.nix;
+            home-manager.users.zorin = import ./home/zorin/home.nix;
+            home-manager.backupFileExtension = "backup";
           }
         ];
       };
 
-      # Optional standalone Home Manager
-      # homeConfigurations.zorin = home-manager.lib.homeManagerConfiguration {
-      #   inherit pkgs;
-      #   modules = [ ./Home/zorin/home.nix ];
-      # };
+      # ------------------------------
+      # Standalone Home Manager
+      # ------------------------------
+      homeConfigurations.zorin = home-manager.lib.homeManagerConfiguration {
+        inherit pkgs;
+        modules = [ ./home/zorin/home.nix ];
+      };
     };
 }
-
