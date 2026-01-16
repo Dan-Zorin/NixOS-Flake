@@ -11,6 +11,7 @@
     ./modules/services.nix
     ./modules/virtualization.nix
     ./modules/nvidia.nix
+    ./modules/sddm.nix
   ];
 
   # ==========================================
