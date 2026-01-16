@@ -33,7 +33,6 @@
     # Version control
     git
     git-lfs
-
     # Build tools
     gcc
     gnumake
@@ -83,17 +82,17 @@
     # ==========================================
     # Media
     # ==========================================
-    # mpv             # Video player
-    # imv             # Image viewer
-    # spotify         # Music
+    mpv              # Video player
+    # imv            # Image viewer
+    strawberry       # Music
 
     # ==========================================
     # Productivity
     # ==========================================
-    # firefox
+    vivaldi  		
     # chromium
     # obsidian        # Notes
-    # discord
+    discord
     # slack
 
     # ==========================================

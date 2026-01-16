@@ -28,13 +28,6 @@
   # Flatpak (optional)
   # services.flatpak.enable = true;
 
-  # Locate/mlocate for finding files
-  services.locate = {
-    enable = true;
-    package = pkgs.mlocate;
-    localuser = null;
-  };
-
   # Automatic garbage collection
   nix.gc = {
     automatic = true;

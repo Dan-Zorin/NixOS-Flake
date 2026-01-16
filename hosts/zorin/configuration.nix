@@ -10,6 +10,7 @@
     ./modules/networking.nix
     ./modules/services.nix
     ./modules/virtualization.nix
+    ./modules/nvidia.nix
   ];
 
   # ==========================================
@@ -89,6 +90,7 @@
   # ==========================================
   # System Packages (keep minimal!)
   # ==========================================
+
 
   environment.systemPackages = with pkgs; [
     # Essential tools only
