@@ -11,6 +11,7 @@
     ./desktop/hyprland.nix
     ./desktop/quickshell.nix
     ./desktop/theme.nix
+    ./desktop/kdeconnect.nix
 
     # Shell & terminal
     ./shell/fish.nix
