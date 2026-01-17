@@ -12,6 +12,7 @@
     ./modules/virtualization.nix
     ./modules/nvidia.nix
     ./modules/sddm.nix
+    ./modules/gaming.nix
   ];
 
   # ==========================================

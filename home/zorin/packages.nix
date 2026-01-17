@@ -3,6 +3,11 @@
 {
   home.packages = with pkgs; [
     # ==========================================
+    # Nix Tools
+    # ==========================================
+    home-manager  # Standalone home-manager command
+
+    # ==========================================
     # Terminal Tools
     # ==========================================
     eza           # Modern ls replacement
@@ -30,6 +35,11 @@
     # ==========================================
     # Development
     # ==========================================
+    # IDEs
+    jetbrains.idea-community  # IntelliJ IDEA Community (Free)
+    # jetbrains.idea-ultimate  # IntelliJ IDEA Ultimate (Paid)
+
+
     # Version control
     git
     git-lfs
@@ -69,7 +79,7 @@
     # wofi            # Alternative launcher
 
     # File managers
-    # thunar          # GUI file manager
+     xfce.thunar          # GUI file manager
     # dolphin         # KDE file manager
 
     # ==========================================
@@ -78,7 +88,23 @@
     nerd-fonts.blex-mono
     nerd-fonts.jetbrains-mono
     nerd-fonts.fira-code
+    # ==========================================
+    # Gaming
+    # ==========================================
+    # Game launchers
+    heroic           # Epic Games & GOG launcher
+    lutris           # Universal game launcher
+    bottles          # Wine manager for Windows games
+    prismlauncher    # Minecraft launcher
 
+    # Game utilities
+    gamemode         # Performance optimizer
+    gamescope        # Gaming compositor
+    mangohud         # Performance overlay
+    goverlay         # MangoHud GUI configurator
+
+    # Game controllers
+    antimicrox       # Gamepad mapper
     # ==========================================
     # Media
     # ==========================================

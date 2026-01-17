@@ -7,7 +7,7 @@
     settings = {
       # User info
       user = {
-        name = "Dan Zorin";  # Change this
+        name = "Dan-Zorin";  # Change this
         email = "your@email.com";  # Change this
       };
 
