@@ -12,6 +12,14 @@
     enable = true;
     # allowedTCPPorts = [ 80 443 22 ];
     # allowedUDPPorts = [ ];
+
+    # KDE Connect ports
+    allowedTCPPortRanges = [
+      { from = 1714; to = 1764; }  # KDE Connect
+    ];
+    allowedUDPPortRanges = [
+      { from = 1714; to = 1764; }  # KDE Connect
+    ];
   };
 
   # Optional: disable wait-online service (faster boot)
@@ -32,11 +40,11 @@
   };
 
   # Optional: OpenSSH
-  # services.openssh = {
-  #   enable = true;
-  #   settings = {
-  #     PasswordAuthentication = false;
-  #     PermitRootLogin = "no";
-  #   };
-  # };
+   services.openssh = {
+     enable = true;
+     settings = {
+       PasswordAuthentication = false;
+       PermitRootLogin = "no";
+     };
+   };
 }
