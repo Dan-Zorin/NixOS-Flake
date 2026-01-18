@@ -52,6 +52,17 @@
   # D-Bus
   services.dbus.enable = true;
 
+  # Enable systemd user services (important for KDE Connect)
+  systemd.user.services = {
+    # Ensure user services start properly
+    dbus = {
+      enable = true;
+    };
+  };
+
   # Polkit (for privilege escalation)
   security.polkit.enable = true;
+
+  # Start user services on login
+  security.pam.services.sddm.enableGnomeKeyring = true;
 }
