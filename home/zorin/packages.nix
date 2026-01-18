@@ -79,7 +79,7 @@
     # wofi            # Alternative launcher
 
     # File managers
-     xfce.thunar          # GUI file manager
+    xfce.thunar       # GUI file manager
     # dolphin         # KDE file manager
 
     # ==========================================
