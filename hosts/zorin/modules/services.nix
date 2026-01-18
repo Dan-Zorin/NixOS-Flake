@@ -49,6 +49,11 @@
     auto-optimise-store = true;
   };
 
+  # GVFS - Virtual filesystem (trash, network shares, MTP, etc.)
+  services.gvfs.enable = true;
+
+  # Tumbler - Thumbnail generation for Thunar
+  services.tumbler.enable = true;
   # D-Bus
   services.dbus.enable = true;
 

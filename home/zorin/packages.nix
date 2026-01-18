@@ -79,8 +79,11 @@
     # wofi            # Alternative launcher
 
     # File managers
-    xfce.thunar       # GUI file manager
-    # dolphin         # KDE file manager
+    xfce.thunar                     # GUI file manager
+    xfce.thunar-volman              # Removable media management
+    xfce.thunar-archive-plugin      # Archive support
+    xfce.thunar-media-tags-plugin   # Media tags
+    file-roller                     # File Roller to compress and decompress
 
     # ==========================================
     # Fonts
@@ -110,8 +113,6 @@
     # ==========================================
     mpv              # Video player
     # imv            # Image viewer
-    strawberry       # Music
-
     # ==========================================
     # Productivity
     # ==========================================

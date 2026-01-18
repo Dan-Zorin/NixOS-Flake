@@ -47,8 +47,8 @@
   hardware.graphics.extraPackages = with pkgs; [
     # Intel
     intel-media-driver
-    vaapiIntel
-    vaapiVdpau
+    intel-vaapi-driver
+    libva-vdpau-driver
     libvdpau-va-gl
 
     # NVIDIA (if you have NVIDIA GPU)
@@ -56,7 +56,7 @@
   ];
 
   hardware.graphics.extraPackages32 = with pkgs.pkgsi686Linux; [
-    vaapiIntel
+    intel-vaapi-driver
   ];
 
   # ==========================================

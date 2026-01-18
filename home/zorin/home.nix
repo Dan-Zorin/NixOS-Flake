@@ -12,6 +12,7 @@
     ./desktop/quickshell.nix
     ./desktop/theme.nix
     ./desktop/kdeconnect.nix
+    ./desktop/polkit.nix
 
     # Shell & terminal
     ./shell/fish.nix

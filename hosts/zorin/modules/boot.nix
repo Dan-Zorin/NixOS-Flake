@@ -1,6 +1,8 @@
 { config, pkgs, ... }:
 
 {
+    hardware.cpu.intel.updateMicrocode = false;
+
   # Bootloader configuration
   boot.loader = {
     systemd-boot.enable = true;
