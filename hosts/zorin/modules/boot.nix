@@ -19,7 +19,7 @@
   # };
 
   # Kernel parameters
-  boot.kernelPackages = pkgs.linuxPackages_latest;
+  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
   # Optional: kernel modules
   # boot.kernelModules = [ "kvm-intel" "kvm-amd" ];

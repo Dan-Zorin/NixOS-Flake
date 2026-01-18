@@ -47,8 +47,8 @@
   hardware.graphics.extraPackages = with pkgs; [
     # Intel
     intel-media-driver
-    intel-vaapi-driver
-    libva-vdpau-driver
+    vaapiIntel
+    vaapiVdpau
     libvdpau-va-gl
 
     # NVIDIA (if you have NVIDIA GPU)
@@ -56,7 +56,7 @@
   ];
 
   hardware.graphics.extraPackages32 = with pkgs.pkgsi686Linux; [
-    intel-vaapi-driver
+    vaapiIntel
   ];
 
   # ==========================================
@@ -80,6 +80,10 @@
   # ==========================================
   # Kernel & Performance
   # ==========================================
+
+  # Use Xanmod kernel for better gaming performance
+  # This is already set in boot.nix
+  # boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
   # Kernel parameters for gaming
   boot.kernel.sysctl = {
