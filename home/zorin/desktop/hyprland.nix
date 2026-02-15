@@ -7,7 +7,7 @@
     recursive = true;
   };
 
-  # Optional: Hyprland-specific packages
+  # Optional: Hyprland-specific packages including support for X11
   home.packages = with pkgs; [
     hyprpaper        # Wallpaper daemon
     hypridle         # Idle daemon

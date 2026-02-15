@@ -17,6 +17,34 @@
     extraCompatPackages = with pkgs; [
       proton-ge-bin  # GE-Proton for better game compatibility
     ];
+
+    # Font rendering fix
+    fontPackages = with pkgs; [
+      liberation_ttf
+      wqy_zenhei
+    ];
+
+    # Package overrides for better compatibility
+    package = pkgs.steam.override {
+      extraEnv = {
+        # Force X11 backend for better compatibility
+        GDK_BACKEND = "x11";
+        # Disable some Wayland features that cause issues
+        SDL_VIDEODRIVER = "x11";
+      };
+      extraPkgs = pkgs: with pkgs; [
+        xorg.libXcursor
+        xorg.libXi
+        xorg.libXinerama
+        xorg.libXScrnSaver
+        libpng
+        libpulseaudio
+        libvorbis
+        stdenv.cc.cc.lib
+        libkrb5
+        keyutils
+      ];
+    };
   };
 
   # GameMode - Optimizes system performance for games
@@ -46,10 +74,10 @@
   # Vulkan support
   hardware.graphics.extraPackages = with pkgs; [
     # Intel
-    intel-media-driver
-    intel-vaapi-driver
-    libva-vdpau-driver
-    libvdpau-va-gl
+     intel-media-driver
+     intel-vaapi-driver
+     libva-vdpau-driver
+     libvdpau-va-gl
 
     # NVIDIA (if you have NVIDIA GPU)
     # Already covered in nvidia.nix
@@ -75,6 +103,10 @@
     # heroic      # Epic Games & GOG
     # lutris      # Multi-platform game manager
     # bottles     # Windows games via Wine
+
+    # Steam Tools for more advance tinker with games and variables
+    steam-run
+    protonplus
   ];
 
   # ==========================================
@@ -135,4 +167,7 @@
 
   # Enable Wine for running Windows games
   # (This is handled by Steam Proton, but useful for non-Steam games)
+
+  # Waydroid for Android apps
+  virtualisation.waydroid.enable = true;
 }

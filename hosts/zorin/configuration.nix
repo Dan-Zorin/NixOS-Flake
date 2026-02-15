@@ -13,6 +13,10 @@
     ./modules/nvidia.nix
     ./modules/sddm.nix
     ./modules/gaming.nix
+    ./modules/uwsm.nix
+    ./modules/mount.nix
+    ./modules/avahi.nix
+    ./modules/edid.nix
   ];
 
   # ==========================================
@@ -49,6 +53,7 @@
   # Enable Hyprland
   programs.hyprland = {
     enable = true;
+    withUWSM = true;
     xwayland.enable = true;
   };
 
@@ -92,8 +97,6 @@
   # ==========================================
   # System Packages (keep minimal!)
   # ==========================================
-
-
   environment.systemPackages = with pkgs; [
     # Essential tools only
     vim
@@ -101,7 +104,7 @@
     wget
     curl
     htop
-
+    home-manager
     # For Wayland/Hyprland
     wayland
     xwayland
@@ -110,6 +113,9 @@
     qt5.qtwayland
     qt6.qtwayland
     libsForQt5.qt5ct
+
+    # Kernel Tools
+    linuxKernel.packages.linux_xanmod_latest.cpupower # Performance power options for xanmod
   ];
 
   # Qt theming
@@ -130,6 +136,6 @@
   # ==========================================
   # System Version
   # ==========================================
-
+  
   system.stateVersion = "25.11";
 }

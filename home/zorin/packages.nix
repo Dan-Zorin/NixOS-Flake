@@ -5,7 +5,6 @@
     # ==========================================
     # Nix Tools
     # ==========================================
-    home-manager  # Standalone home-manager command
 
     # ==========================================
     # Terminal Tools
@@ -60,10 +59,12 @@
     wget
     curl
     rsync
+    transmission_4-qt6
 
     # ==========================================
     # Wayland/Hyprland Utilities
     # ==========================================
+    uwsm              # Universal Wayland Session Manager
     wl-clipboard      # Clipboard utilities (wl-copy, wl-paste)
     cliphist          # Clipboard history
     grim              # Screenshot tool
@@ -111,7 +112,9 @@
     # ==========================================
     # Media
     # ==========================================
-    mpv              # Video player
+    strawberry       # Music player
+    vlc
+                  # Video player
     # imv            # Image viewer
     # ==========================================
     # Productivity
@@ -120,6 +123,7 @@
     # chromium
     # obsidian        # Notes
     discord
+    betterdiscordctl
     # slack
 
     # ==========================================
@@ -129,5 +133,8 @@
     file
     which
     killall
+    libxcb
+    libxcb-cursor
+    xorg.libX11
   ];
 }

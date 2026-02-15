@@ -47,7 +47,9 @@
   # Kernel parameters for NVIDIA
   boot.kernelParams = [
     "nvidia-drm.modeset=1"
+    "nvidia-drm.fbdev=1"  # Better HDMI detection
+    "video=HDMI-A-1:1920x1080@60e"  # Force HDMI to 60Hz (e = enable)
     # Uncomment if you have suspend issues:
-    # "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
+     "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
   ];
 }
