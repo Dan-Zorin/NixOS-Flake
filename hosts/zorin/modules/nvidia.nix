@@ -24,7 +24,7 @@
 
     # Select the appropriate driver version
     # Options: "stable", "beta", "production", or a specific version
-    package = config.boot.kernelPackages.nvidiaPackages.stable;
+    package = config.boot.kernelPackages.nvidiaPackages.production;
   };
 
   # Enable OpenGL with NVIDIA
