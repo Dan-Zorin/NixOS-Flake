@@ -17,6 +17,7 @@
     ./modules/mount.nix
     ./modules/avahi.nix
     ./modules/edid.nix
+    ./modules/protonhax.nix
   ];
 
   # ==========================================
@@ -45,6 +46,9 @@
 
   # Console keymap
   console.keyMap = "us";
+
+  # Enable ProtonHax for game modding
+  services.protonhax.enable = true;
 
   # ==========================================
   # Display/Graphics
