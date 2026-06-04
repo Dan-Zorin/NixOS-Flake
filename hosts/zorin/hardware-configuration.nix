@@ -57,6 +57,9 @@ fileSystems."/.snapshots" = {
 # Swap
 swapDevices = [
   { device = "/dev/disk/by-uuid/10da0edb-b5d9-4a91-bd94-957c8a43f62e"; }
+  { device = "/var/lib/swapfile";
+    size = 10240;  # 10 GB
+    }
 ];
 
 

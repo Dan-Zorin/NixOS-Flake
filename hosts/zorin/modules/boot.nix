@@ -1,7 +1,7 @@
 { config, pkgs, ... }:
 
 {
-    hardware.cpu.intel.updateMicrocode = false;
+    hardware.cpu.intel.updateMicrocode = true;
 
   # Bootloader configuration
   boot.loader = {
@@ -21,7 +21,7 @@
   # };
 
   # Kernel parameters
-  boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
+  boot.kernelPackages = pkgs.linuxPackages;
 
   # Optional: kernel modules
   # boot.kernelModules = [ "kvm-intel" "kvm-amd" ];

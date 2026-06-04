@@ -2,9 +2,10 @@
   description = "Dan Zorin's NixOS system with Home Manager";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    nixpkgs-2511.url = "github:NixOS/nixpkgs/nixos-25.11";
     flake-utils.url = "github:numtide/flake-utils";
-    home-manager.url = "github:nix-community/home-manager/release-25.11";
+    home-manager.url = "github:nix-community/home-manager/release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
@@ -22,6 +23,7 @@
       # ------------------------------
       nixosConfigurations.zorin = nixpkgs.lib.nixosSystem {
         inherit system;
+        specialArgs = { inherit inputs; };
         modules = [
           # Main system configuration
           ./hosts/zorin/configuration.nix

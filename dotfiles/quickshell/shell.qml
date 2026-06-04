@@ -39,7 +39,7 @@ ShellRoot {
     // CPU frequency
     Process {
         id: cpuProc
-        command: ["sh", "-c", "cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq | awk '{printf \"%.2f\\n\", $1/10000}'"]
+        command: ["sh", "-c", "cat /sys/devices/system/cpu/cpu0/cpufreq/scaling_cur_freq | awk '{printf \"%.2f\\n\", $1/1000}'"]
         stdout: SplitParser {
             onRead: data => cpuUsage = parseFloat(data)
         }

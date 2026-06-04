@@ -35,7 +35,7 @@
     # Development
     # ==========================================
     # IDEs
-    jetbrains.idea-community  # IntelliJ IDEA Community (Free)
+    jetbrains.idea-oss         # IntelliJ IDEA Community (Free)
     # jetbrains.idea-ultimate  # IntelliJ IDEA Ultimate (Paid)
 
 
@@ -49,7 +49,7 @@
 
     # Languages & runtimes (add what you need)
     # nodejs
-    # python3
+    python3
     # rustup
     # go
 
@@ -119,11 +119,12 @@
     # ==========================================
     # Productivity
     # ==========================================
-    vivaldi  		
-    # chromium
+    vivaldi
     # obsidian        # Notes
     discord
-    betterdiscordctl
+    vesktop
+    betterdiscord-installer
+    libreoffice-fresh # Writer
     # slack
 
     # ==========================================

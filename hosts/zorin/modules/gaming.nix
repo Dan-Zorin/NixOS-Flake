@@ -28,9 +28,14 @@
     package = pkgs.steam.override {
       extraEnv = {
         # Force X11 backend for better compatibility
-        GDK_BACKEND = "x11";
+        GDK_BACKEND = "wayland,x11";
         # Disable some Wayland features that cause issues
-        SDL_VIDEODRIVER = "x11";
+        SDL_VIDEODRIVER = "wayland,x11";
+        # Setting up Display to fix any session issues
+        DISPLAY = ":0";
+        # Better Vulkan/DXVK performance
+        DXVK_ASYNC = "1";
+        PROTON_ENABLE_NVAPI = "0";
       };
       extraPkgs = pkgs: with pkgs; [
         xorg.libXcursor
@@ -43,6 +48,8 @@
         stdenv.cc.cc.lib
         libkrb5
         keyutils
+        xorg.libxcb
+        xorg.libX11
       ];
     };
   };

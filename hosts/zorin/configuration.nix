@@ -7,17 +7,20 @@
 
     # System modules
     ./modules/boot.nix
-    ./modules/networking.nix
-    ./modules/services.nix
-    ./modules/virtualization.nix
+    ./modules/mount.nix
     ./modules/nvidia.nix
+    ./modules/services.nix
+    ./modules/networking.nix
+    ./modules/virtualization.nix
+    ./modules/sleep.nix
+    ./modules/shotdown.nix
     ./modules/sddm.nix
     ./modules/gaming.nix
     ./modules/uwsm.nix
-    ./modules/mount.nix
     ./modules/avahi.nix
     ./modules/edid.nix
     ./modules/protonhax.nix
+    ./modules/duckstation.nix
   ];
 
   # ==========================================
@@ -112,6 +115,7 @@
     # For Wayland/Hyprland
     wayland
     xwayland
+    vencord
 
     # Qt styling for Wayland
     qt5.qtwayland
@@ -141,5 +145,5 @@
   # System Version
   # ==========================================
   
-  system.stateVersion = "25.11";
+  system.stateVersion = "26.05";
 }

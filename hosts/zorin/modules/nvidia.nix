@@ -9,7 +9,7 @@
     modesetting.enable = true;
 
     # Enable power management (experimental, can cause sleep/suspend issues)
-    powerManagement.enable = false;
+    powerManagement.enable = true;
 
     # Fine-grained power management (turns off GPU when not in use)
     # Experimental and only works on modern NVIDIA GPUs (Turing+)
@@ -24,7 +24,7 @@
 
     # Select the appropriate driver version
     # Options: "stable", "beta", "production", or a specific version
-    package = config.boot.kernelPackages.nvidiaPackages.production;
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
   };
 
   # Enable OpenGL with NVIDIA
@@ -48,7 +48,6 @@
   boot.kernelParams = [
     "nvidia-drm.modeset=1"
     "nvidia-drm.fbdev=1"  # Better HDMI detection
-    "video=HDMI-A-1:1920x1080@60e"  # Force HDMI to 60Hz (e = enable)
     # Uncomment if you have suspend issues:
      "nvidia.NVreg_PreserveVideoMemoryAllocations=1"
   ];
