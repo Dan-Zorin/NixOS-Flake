@@ -1,6 +1,10 @@
 { config, pkgs, ... }:
 
 {
+
+  #Enable Hyprland With UWSM support
+
+
   # Hyprland configuration files
   home.file.".config/hypr" = {
     source = ../../../dotfiles/hypr;
@@ -9,12 +13,12 @@
 
   # Optional: Hyprland-specific packages including support for X11
   home.packages = with pkgs; [
-    hyprpaper        # Wallpaper daemon
+    swaybg           # Wallpaper daemon
     hypridle         # Idle daemon
     hyprlock         # Screen locker
     hyprpicker       # Color picker
     wl-clipboard     # Clipboard utilities
-    grim             # Screenshot tool
+    flameshot        # Screenshot tool
     slurp            # Region selector
   ];
 }

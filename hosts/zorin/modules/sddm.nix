@@ -2,29 +2,21 @@
 
 {
   # ==========================================
-  # SDDM with UWSM Support
+  # greetd with tuigreet + UWSM
   # ==========================================
-  services.displayManager.sddm = {
+  services.greetd = {
     enable = true;
-    wayland.enable = true;
-
-    # Auto-login (INSECURE - only for single-user systems)
-    autoLogin = {
-      enable = true;
-      user = "zorin";
-      relogin = false;  # Don't auto-login after manual logout
+    settings = {
+      default_session = {
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --cmd 'uwsm start hyprland'";
+        user = "greeter";
+      };
     };
   };
 
+  # Keyboard layout (no longer needs xserver)
+  console.keyMap = "us";
 
-  # Enable X11 for backwards compatibility (optional)
-  services.xserver = {
-    enable = true;
-
-    # Keyboard layout
-    xkb = {
-      layout = "us";
-      # variant = "";
-    };
-  };
+  # Suppress the "last login" noise on the greeter TTY
+  environment.etc."issue".text = "";
 }

@@ -35,8 +35,7 @@
     # Development
     # ==========================================
     # IDEs
-    jetbrains.idea-oss         # IntelliJ IDEA Community (Free)
-    # jetbrains.idea-ultimate  # IntelliJ IDEA Ultimate (Paid)
+    jetbrains.idea            # IntelliJ IDEA Ultimate (Paid)
 
 
     # Version control
@@ -114,7 +113,7 @@
     # ==========================================
     strawberry       # Music player
     vlc
-                  # Video player
+    mpv             # Video player
     # imv            # Image viewer
     # ==========================================
     # Productivity

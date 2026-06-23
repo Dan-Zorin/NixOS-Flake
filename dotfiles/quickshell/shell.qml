@@ -198,14 +198,19 @@ ShellRoot {
                 color: root.colBgAlpha
                 radius: 8
 
-                RowLayout {
+                // Use a plain Item as the layout container so we can
+                // position the three sections with explicit anchors
+                // instead of relying on RowLayout fillWidth spacers.
+                Item {
+                    id: barContent
                     anchors.fill: parent
                     anchors.margins: 4
-                    spacing: 8
 
                     // LEFT SECTION
                     RowLayout {
-                        Layout.alignment: Qt.AlignLeft
+                        id: leftSection
+                        anchors.left: parent.left
+                        anchors.verticalCenter: parent.verticalCenter
                         spacing: 8
 
                         // Logo
@@ -266,12 +271,15 @@ ShellRoot {
                         }
                     }
 
-                    Item { Layout.fillWidth: true }
-
                     // CENTER SECTION - Clock
+                    // Anchored to the horizontal center of the whole bar,
+                    // independent of how wide the left/right sections are.
                     Rectangle {
-                        Layout.alignment: Qt.AlignHCenter
-                        Layout.preferredHeight: 24
+                        id: clockBubble
+                        anchors.horizontalCenter: parent.horizontalCenter
+                        anchors.verticalCenter: parent.verticalCenter
+                        height: 24
+                        width: clockText.contentWidth + 28
                         color: root.colBubble
                         radius: 12
 
@@ -287,8 +295,6 @@ ShellRoot {
                             rightPadding: 14
                         }
 
-                        width: clockText.contentWidth + 28
-
                         Timer {
                             interval: 1000
                             running: true
@@ -297,11 +303,11 @@ ShellRoot {
                         }
                     }
 
-                    Item { Layout.fillWidth: true }
-
                     // RIGHT SECTION - System info
                     RowLayout {
-                        Layout.alignment: Qt.AlignRight
+                        id: rightSection
+                        anchors.right: parent.right
+                        anchors.verticalCenter: parent.verticalCenter
                         spacing: 6
 
                         // System Tray
@@ -345,12 +351,12 @@ ShellRoot {
                         }
 
                         InfoBubble {
-                            text: " " + memUsage.toFixed(1) + "GB"
+                            text: " " + memUsage.toFixed(1) + "GB"
                             textColor: root.colYellow
                         }
 
                         InfoBubble {
-                            text: " " + cpuUsage.toFixed(2) + "GHz"
+                            text: " " + cpuUsage.toFixed(2) + "GHz"
                             textColor: root.colCyan
                         }
 

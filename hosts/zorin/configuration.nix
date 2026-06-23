@@ -57,6 +57,7 @@
   # Display/Graphics
   # ==========================================
 
+  programs.uwsm.enable = true;
   # Enable Hyprland
   programs.hyprland = {
     enable = true;
@@ -116,6 +117,9 @@
     wayland
     xwayland
     vencord
+    # Hosting Tools only
+    podman-compose
+
 
     # Qt styling for Wayland
     qt5.qtwayland
@@ -129,6 +133,7 @@
   # Qt theming
   environment.sessionVariables = {
     QT_QPA_PLATFORMTHEME = "qt5ct";
+    VENCORD_USER_DATA_DIR = "/home/zorin/.config/vesktop";
   };
 
   # ==========================================
