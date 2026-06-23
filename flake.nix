@@ -7,7 +7,6 @@
     flake-utils.url = "github:numtide/flake-utils";
     home-manager.url = "github:nix-community/home-manager/release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
-    nix-openclaw.url = "github:openclaw/nix-openclaw";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
@@ -34,7 +33,6 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit inputs; };
             home-manager.users.zorin = import ./home/zorin/home.nix;
             home-manager.backupFileExtension = "backup";
           }

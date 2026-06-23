@@ -36,6 +36,10 @@
     # ==========================================
     # IDEs
     jetbrains.idea            # IntelliJ IDEA Ultimate (Paid)
+    manix
+    ollama
+    opencode
+
 
 
     # Version control
