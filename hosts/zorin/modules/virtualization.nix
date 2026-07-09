@@ -8,15 +8,6 @@
     defaultNetwork.settings.dns_enabled = true;
   };
 
-  # Docker (if you prefer it over Podman)
-  # virtualisation.docker = {
-  #   enable = true;
-  #   rootless = {
-  #     enable = true;
-  #     setSocketVariable = true;
-  #   };
-  # };
-
   # libvirt/QEMU for VMs
   virtualisation.libvirtd = {
     enable = true;

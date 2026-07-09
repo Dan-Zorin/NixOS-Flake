@@ -21,6 +21,10 @@
     ./modules/edid.nix
     ./modules/protonhax.nix
     ./modules/duckstation.nix
+
+    # System Services
+    ./service/playit.nix
+
   ];
 
   # ==========================================
@@ -113,6 +117,8 @@
     curl
     htop
     home-manager
+    wireguard-tools
+
     # For Wayland/Hyprland
     wayland
     xwayland
