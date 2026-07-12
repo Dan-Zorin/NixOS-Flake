@@ -12,18 +12,16 @@
     ./modules/services.nix
     ./modules/networking.nix
     ./modules/virtualization.nix
-    ./modules/sleep.nix
     ./modules/shotdown.nix
     ./modules/sddm.nix
     ./modules/gaming.nix
-    ./modules/uwsm.nix
+    #./modules/uwsm.nix
     ./modules/avahi.nix
-    ./modules/edid.nix
-    ./modules/protonhax.nix
     ./modules/duckstation.nix
 
     # System Services
-    ./service/playit.nix
+    ./service/portainer.nix
+    ./service/jellyfine-nginx.nix
 
   ];
 
@@ -53,9 +51,6 @@
 
   # Console keymap
   console.keyMap = "us";
-
-  # Enable ProtonHax for game modding
-  services.protonhax.enable = true;
 
   # ==========================================
   # Display/Graphics

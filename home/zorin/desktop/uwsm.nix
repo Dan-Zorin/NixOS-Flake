@@ -4,16 +4,6 @@
   # UWSM wrapper for Hyprland
   # This wraps the existing Hyprland session
 
-  # XDG autostart file to launch with UWSM
-  xdg.configFile."autostart/uwsm-hyprland.desktop".text = ''
-    [Desktop Entry]
-    Type=Application
-    Name=UWSM Hyprland Wrapper
-    Exec=${pkgs.uwsm}/bin/uwsm finalize
-    X-GNOME-Autostart-enabled=true
-    NoDisplay=true
-  '';
-
   # UWSM environment configuration
   home.file.".config/uwsm/env".text = ''
     # Wayland environment variables

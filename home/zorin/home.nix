@@ -34,6 +34,7 @@
 
   # Wayland session variables
   home.sessionVariables = {
+    BROWSER = "vivaldi-stable";
     NIXOS_OZONE_WL = "1";
     MOZ_ENABLE_WAYLAND = "1";
     QT_QPA_PLATFORM = "wayland;xcb";  # Try Wayland first, fallback to X11

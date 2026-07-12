@@ -10,7 +10,7 @@
   # Enable firewall
   networking.firewall = {
     enable = true;
-     allowedTCPPorts = [ 80 443 22 37365 ];
+     allowedTCPPorts = [ 80 443 22 37365 2222 ];
      allowedUDPPorts = [ 37365 ];
 
     # KDE Connect ports

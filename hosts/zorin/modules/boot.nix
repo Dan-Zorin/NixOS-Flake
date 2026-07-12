@@ -7,20 +7,22 @@
   boot.loader = {
     systemd-boot.enable = true;
     efi.canTouchEfiVariables = true;
-
+    boot.loader.systemd-boot.consoleMode = "max";
     # Optional: timeout before auto-boot
-    timeout = 5;
+    timeout = 10;
   };
 
-  # Or if you use GRUB instead:
-  # boot.loader.grub = {
-  #   enable = true;
-  #   device = "nodev";
-  #   efiSupport = true;
-  #   useOSProber = true;  # Detect other OS
-  # };
 
-  # Kernel parameters
+
+  boot.kernelParams = [
+    "video=1920x1080@60"   # match your actual monitor's native resolution
+  ];
+
+  boot.plymouth = {
+    enable = true;
+    # theme = "...";
+  };
+  boot.consoleLogLevel = 3;
   boot.kernelPackages = pkgs.linuxPackages;
 
   # Optional: kernel modules
@@ -29,6 +31,4 @@
   # Optional: disable specific modules
   boot.blacklistedKernelModules = [ "nouveau" ];
 
-  # Plymouth boot splash (optional)
-  boot.plymouth.enable = true;
 }
