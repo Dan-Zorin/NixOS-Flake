@@ -15,7 +15,7 @@
 
 {
   virtualisation.oci-containers.containers.portainer = {
-    image = "portainer/portainer-ce:latest";
+    image = "portainer/portainer-ee:latest";
     autoStart = true;
 
     ports = [

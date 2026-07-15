@@ -16,6 +16,14 @@
         inherit system;
         config.allowUnfree = true;
       };
+         vars = {
+              username = "zorin";
+              fullName = "Dan Zorin";
+              hostName = "zorin";
+              homeDirectory = "/home/zorin";
+              timeZone = "America/Panama";
+              ddnsHost = "danzorin.ddns.net";
+            };
     in
     {
       # ------------------------------
@@ -23,7 +31,7 @@
       # ------------------------------
       nixosConfigurations.zorin = nixpkgs.lib.nixosSystem {
         inherit system;
-        specialArgs = { inherit inputs; };
+        specialArgs = { inherit inputs vars; };
         modules = [
           # Main system configuration
           ./hosts/zorin/configuration.nix
@@ -33,6 +41,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
+            home-manager.extraSpecialArgs = { inherit vars; };
             home-manager.users.zorin = import ./home/zorin/home.nix;
             home-manager.backupFileExtension = "backup";
           }

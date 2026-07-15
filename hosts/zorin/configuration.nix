@@ -21,7 +21,8 @@
 
     # System Services
     ./service/portainer.nix
-    ./service/jellyfine-nginx.nix
+    ./service/jellyfin-nginx.nix
+    ./service/ds3.nix
 
   ];
 
