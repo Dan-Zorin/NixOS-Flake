@@ -15,7 +15,7 @@
     ./modules/shotdown.nix
     ./modules/sddm.nix
     ./modules/gaming.nix
-    #./modules/uwsm.nix
+    ./modules/android.nix
     ./modules/avahi.nix
     ./modules/duckstation.nix
 
@@ -92,6 +92,7 @@
       "wheel"           # sudo access
       "networkmanager"  # network management
       "video"           # video devices
+      "render"
       "audio"           # audio devices
       "libvirtd"        # VMs
       "podman"          # containers

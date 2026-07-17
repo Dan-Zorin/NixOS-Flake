@@ -109,6 +109,7 @@
     mangohud         # Performance overlay
     goverlay         # MangoHud GUI configurator
     temurin-bin-17   # Java For Modpacks
+    minigalaxy       # Minigalaxy
 
     # Game controllers
     antimicrox       # Gamepad mapper

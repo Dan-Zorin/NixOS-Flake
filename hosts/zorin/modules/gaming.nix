@@ -50,6 +50,8 @@
         keyutils
         xorg.libxcb
         xorg.libX11
+        dnsmasq
+        nftables
       ];
     };
   };
@@ -177,4 +179,6 @@
 
   # Waydroid for Android apps
   virtualisation.waydroid.enable = true;
+  virtualisation.waydroid.package = pkgs.waydroid-nftables;
+
 }
