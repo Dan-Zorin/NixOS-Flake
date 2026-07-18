@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   imports = [
@@ -117,6 +117,7 @@
     wireguard-tools
 
     # For Wayland/Hyprland
+    inputs.mangowm.packages.${pkgs.system}.mango
     wayland
     xwayland
     vencord

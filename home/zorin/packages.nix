@@ -72,6 +72,7 @@
     grim              # Screenshot tool
     slurp             # Region selector for screenshots
     swappy            # Screenshot editor
+    wlr-randr
 
     # Notifications
     mako              # Notification daemon

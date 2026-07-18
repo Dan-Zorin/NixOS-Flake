@@ -14,7 +14,6 @@
     ./desktop/kdeconnect.nix
     ./desktop/polkit.nix
     ./desktop/uwsm.nix
-    ./desktop/ollama.nix
 
     # Shell & terminal
     ./shell/fish.nix

@@ -18,6 +18,9 @@ hl.monitor({ output = "HDMI-A-1", mode = "1920x1080@60",   position = "auto", sc
 
 -- Config
 hl.config({
+    xwayland = {
+            force_zero_scaling = true
+    },
     general = {
         gaps_in          = 5,
         gaps_out         = 10,
@@ -64,7 +67,8 @@ hl.config({
         kb_model     = "",
         kb_options   = "",
         kb_rules     = "",
-        follow_mouse = 1,
+        follow_mouse = 2,
+        mouse_refocus = false,
         sensitivity  = 0,
         touchpad = {
             natural_scroll = false,
@@ -176,4 +180,9 @@ hl.window_rule({
     name         = "fix-xwayland-drags",
     match        = { class = "^$", title = "^$", xwayland = true, float = true, fullscreen = false, pin = false },
     no_focus     = true,
+})
+hl.window_rule({
+    name        = "emulator-focus-fix",
+    match       = { class = "Emulator", title = "Android Emulator.*" },
+    no_focus    = false,
 })

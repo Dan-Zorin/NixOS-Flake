@@ -24,36 +24,18 @@
       wqy_zenhei
     ];
 
-    # Package overrides for better compatibility
-    package = pkgs.steam.override {
-      extraEnv = {
-        # Force X11 backend for better compatibility
-        GDK_BACKEND = "wayland,x11";
-        # Disable some Wayland features that cause issues
-        SDL_VIDEODRIVER = "wayland,x11";
-        # Setting up Display to fix any session issues
-        DISPLAY = ":0";
-        # Better Vulkan/DXVK performance
-        DXVK_ASYNC = "1";
-        PROTON_ENABLE_NVAPI = "0";
-      };
-      extraPkgs = pkgs: with pkgs; [
-        xorg.libXcursor
-        xorg.libXi
-        xorg.libXinerama
-        xorg.libXScrnSaver
-        libpng
-        libpulseaudio
-        libvorbis
-        stdenv.cc.cc.lib
-        libkrb5
-        keyutils
-        xorg.libxcb
-        xorg.libX11
-        dnsmasq
-        nftables
-      ];
-    };
+    # NOTE: removed the custom `package = pkgs.steam.override { ... }` block.
+    # That override (added for protonhax experimentation) was preventing the
+    # FHS rootfs build from including gameoverlayrenderer.so, which broke
+    # Shift+Tab overlay in Proton games (e.g. tModLoader).
+    #
+    # If protonhax is revisited later, re-add a minimal override and verify
+    # gameoverlayrenderer.so still exists in the resulting fhsenv-rootfs:
+    #   find /nix/store/*-steam-*-fhsenv-rootfs/ -iname "*overlay*"
+    #
+    # Env vars that were here (DXVK_ASYNC, PROTON_ENABLE_NVAPI, GDK_BACKEND,
+    # SDL_VIDEODRIVER, DISPLAY) are better set as per-game Launch Options:
+    #   DXVK_ASYNC=1 PROTON_ENABLE_NVAPI=0 %command%
   };
 
   # GameMode - Optimizes system performance for games
@@ -109,22 +91,17 @@
     goverlay    # GUI for MangoHud configuration
 
     # Game launchers (system level, or add to home packages)
-    # heroic      # Epic Games & GOG
+    heroic      # Epic Games & GOG
     # lutris      # Multi-platform game manager
     # bottles     # Windows games via Wine
 
     # Steam Tools for more advance tinker with games and variables
-    steam-run
     protonplus
   ];
 
   # ==========================================
-  # Kernel & Performance
+  #  Performance
   # ==========================================
-
-  # Use Xanmod kernel for better gaming performance
-  # This is already set in boot.nix
-  # boot.kernelPackages = pkgs.linuxPackages_xanmod_latest;
 
   # Kernel parameters for gaming
   boot.kernel.sysctl = {
@@ -173,12 +150,5 @@
   # ==========================================
   # Wine for Windows Games
   # ==========================================
-
-  # Enable Wine for running Windows games
-  # (This is handled by Steam Proton, but useful for non-Steam games)
-
-  # Waydroid for Android apps
-  virtualisation.waydroid.enable = true;
-  virtualisation.waydroid.package = pkgs.waydroid-nftables;
 
 }

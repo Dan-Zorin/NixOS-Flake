@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   # ==========================================
@@ -8,7 +8,7 @@
     enable = true;
     settings = {
       default_session = {
-        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --cmd 'uwsm start hyprland'";
+        command = "${pkgs.greetd.tuigreet}/bin/tuigreet --time --remember --sessions /etc/wayland-sessions";
         user = "greeter";
       };
     };
@@ -19,4 +19,12 @@
 
   # Suppress the "last login" noise on the greeter TTY
   environment.etc."issue".text = "";
+
+  environment.etc."wayland-sessions/mango.desktop".text = ''
+    [Desktop Entry]
+    Name=Mango
+    Comment=Mango Wayland Compositor
+    Exec=${inputs.mangowm.packages.${pkgs.system}.mango}/bin/mango
+    Type=Application
+  '';
 }

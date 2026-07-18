@@ -1,7 +1,6 @@
 import Quickshell
 import Quickshell.Wayland
 import Quickshell.Io
-import Quickshell.Hyprland
 import Quickshell.Services.SystemTray
 import QtQuick
 import QtQuick.Layouts
@@ -31,6 +30,9 @@ ShellRoot {
     property int diskUsage: 0
     property int volumeLevel: 0
     property string currentLayout: "Tile"
+
+    // Mango tag state (from mmsg watch all-tags), keyed by tag index (1-9)
+    property var mangoTags: ({})
 
     // Weather properties
     property string weatherEmoji: "🌡"
@@ -112,14 +114,32 @@ ShellRoot {
         Component.onCompleted: running = true
     }
 
-    // Current layout
+    // Mango tag + layout state — replaces Hyprland IPC.
+    // Streams one full JSON line per change from `mmsg watch all-tags`.
     Process {
-        id: layoutProc
-        command: ["sh", "-c", "hyprctl activewindow -j | jq -r 'if .floating then \"Floating\" elif .fullscreen == 1 then \"Fullscreen\" else \"Tiled\" end'"]
+        id: mangoTagsProc
+        command: ["mmsg", "watch", "all-tags"]
         stdout: SplitParser {
             onRead: data => {
-                if (data && data.trim()) {
-                    currentLayout = data.trim()
+                if (!data || !data.trim()) return
+                try {
+                    var parsed = JSON.parse(data)
+                    var monitorEntry = parsed.all_tags && parsed.all_tags[0]
+                    if (!monitorEntry) return
+
+                    var byIndex = {}
+                    var activeLayout = "Tile"
+                    for (var i = 0; i < monitorEntry.tags.length; i++) {
+                        var t = monitorEntry.tags[i]
+                        byIndex[t.index] = t
+                        if (t.is_active) {
+                            activeLayout = t.layout === "T" ? "Tile" : t.layout
+                        }
+                    }
+                    root.mangoTags = byIndex
+                    root.currentLayout = activeLayout
+                } catch (e) {
+                    // ignore malformed/partial lines
                 }
             }
         }
@@ -145,14 +165,6 @@ ShellRoot {
         running: true
         repeat: true
         onTriggered: weatherProc.running = true
-    }
-
-    // Layout updates
-    Connections {
-        target: Hyprland
-        function onRawEvent(event) {
-            layoutProc.running = true
-        }
     }
 
     // Reusable bubble component
@@ -227,7 +239,7 @@ ShellRoot {
                             }
                         }
 
-                        // Workspaces
+                        // Tags (Mango's equivalent of workspaces)
                         Repeater {
                             model: 9
 
@@ -236,13 +248,16 @@ ShellRoot {
                                 Layout.preferredHeight: 24
                                 color: "transparent"
 
-                                property var workspace: Hyprland.workspaces.values.find(ws => ws.id === index + 1) ?? null
-                                property bool isActive: Hyprland.focusedWorkspace?.id === (index + 1)
-                                property bool hasWindows: workspace !== null
+                                property var tagInfo: root.mangoTags[index + 1] ?? null
+                                property bool isActive: tagInfo !== null && tagInfo.is_active === true
+                                property bool isUrgent: tagInfo !== null && tagInfo.is_urgent === true
+                                property bool hasWindows: tagInfo !== null && tagInfo.client_count > 0
 
                                 Text {
-                                    text: " "
-                                    color: parent.isActive ? root.colCyan : (parent.hasWindows ? root.colCyan : root.colMuted)
+                                    text: "\uf4aa "
+                                    color: parent.isUrgent ? root.colRed
+                                        : (parent.isActive ? root.colCyan
+                                            : (parent.hasWindows ? root.colCyan : root.colMuted))
                                     font.pixelSize: root.fontSize
                                     font.family: "Font Awesome 6 Free Solid"
                                     font.bold: true
@@ -260,9 +275,17 @@ ShellRoot {
 
                                 MouseArea {
                                     anchors.fill: parent
-                                    onClicked: Hyprland.dispatch("workspace " + (index + 1))
+                                    onClicked: {
+                                        tagDispatchProc.command = ["mmsg", "dispatch", "view," + (index + 1)]
+                                        tagDispatchProc.running = true
+                                    }
                                 }
                             }
+                        }
+
+                        // Fire-and-forget dispatcher for tag-switch clicks
+                        Process {
+                            id: tagDispatchProc
                         }
 
                         // Layout indicator
