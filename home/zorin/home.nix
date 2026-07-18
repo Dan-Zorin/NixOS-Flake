@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
   home.username = "zorin";
@@ -7,10 +7,14 @@
 
   # Import modular configurations
   imports = [
-    # Desktop environment
+  # Inputs
+    inputs.spicetify-nix.homeManagerModules.spicetify
+
+    # Desktop environment and wrappers
     ./desktop/mango.nix
     ./desktop/quickshell.nix
     ./desktop/theme.nix
+    ./desktop/spicetify.nix
     ./desktop/kdeconnect.nix
     ./desktop/polkit.nix
     ./desktop/uwsm.nix

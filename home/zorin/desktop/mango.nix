@@ -5,13 +5,13 @@
   #Enable Hyprland With UWSM support
 
 
-  # Hyprland configuration files
+  # MangoWC configuration files
   home.file.".config/mango" = {
     source = ../../../dotfiles/mango;
     recursive = true;
   };
 
-  # Optional: Hyprland-specific packages including support for X11
+  # Optional: MangoWC-specific packages including support for X11
   home.packages = with pkgs; [
     swaybg           # Wallpaper daemon
     wl-clipboard     # Clipboard utilities

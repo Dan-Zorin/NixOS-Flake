@@ -9,7 +9,7 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
     mangowm.url = "github:mangowm/mango";
     mangowm.inputs.nixpkgs.follows = "nixpkgs";
-    inputs.spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+    spicetify-nix.url = "github:Gerg-L/spicetify-nix";
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
@@ -44,7 +44,7 @@
           {
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
-            home-manager.extraSpecialArgs = { inherit vars; };
+            home-manager.extraSpecialArgs = { inherit inputs vars; };
             home-manager.users.zorin = import ./home/zorin/home.nix;
             home-manager.backupFileExtension = "backup";
           }
@@ -56,6 +56,7 @@
       # ------------------------------
       homeConfigurations.zorin = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
+        extraSpecialArgs = { inherit inputs vars; };
         modules = [ ./home/zorin/home.nix ];
       };
     };
