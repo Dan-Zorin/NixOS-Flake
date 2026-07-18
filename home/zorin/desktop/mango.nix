@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
 
@@ -6,17 +6,14 @@
 
 
   # Hyprland configuration files
-  home.file.".config/hypr" = {
-    source = ../../../dotfiles/hypr;
+  home.file.".config/mango" = {
+    source = ../../../dotfiles/mango;
     recursive = true;
   };
 
   # Optional: Hyprland-specific packages including support for X11
   home.packages = with pkgs; [
     swaybg           # Wallpaper daemon
-    hypridle         # Idle daemon
-    hyprlock         # Screen locker
-    hyprpicker       # Color picker
     wl-clipboard     # Clipboard utilities
     flameshot        # Screenshot tool
     slurp            # Region selector

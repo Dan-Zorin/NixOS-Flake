@@ -8,7 +8,7 @@
   # Import modular configurations
   imports = [
     # Desktop environment
-    ./desktop/hyprland.nix
+    ./desktop/mango.nix
     ./desktop/quickshell.nix
     ./desktop/theme.nix
     ./desktop/kdeconnect.nix
