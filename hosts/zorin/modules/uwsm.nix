@@ -1,16 +1,13 @@
-{ config, pkgs, ... }:
-
-{
-  # Install UWSM system-wide
-  environment.systemPackages = [ pkgs.uwsm ];
-
-  # Create Hyprland-UWSM session file
-  environment.etc."wayland-sessions/hyprland-uwsm.desktop".text = ''
-    [Desktop Entry]
-    Name=Hyprland (UWSM)
-    Comment=Hyprland Wayland Compositor with UWSM
-    Exec=uwsm start hyprland.desktop
-    Type=Application
-    DesktopNames=Hyprland
-  '';
-}
+{ config, pkgs, inputs, ... }:
+    {
+      programs.uwsm = {
+        enable = true;
+        waylandCompositors = {
+          mango = {
+            prettyName = "Mango";
+            comment = "Mango compositor managed by UWSM";
+            binPath = "${inputs.mangowm.packages.${pkgs.system}.mango}/bin/mango";
+          };
+        };
+      };
+    }

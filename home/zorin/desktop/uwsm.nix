@@ -1,9 +1,6 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 
 {
-  # UWSM wrapper for Hyprland
-  # This wraps the existing Hyprland session
-
   # UWSM environment configuration
   home.file.".config/uwsm/env".text = ''
     # Wayland environment variables
@@ -22,15 +19,5 @@
 
     # XDG
     export XDG_SESSION_TYPE=wayland
-    export XDG_CURRENT_DESKTOP=Hyprland
-    export XDG_SESSION_DESKTOP=Hyprland
-  '';
-
-  # Fish shell integration
-  programs.fish.loginShellInit = ''
-    # Launch Hyprland with UWSM on TTY1
-    if test (tty) = /dev/tty1
-      exec uwsm start -F hyprland.desktop
-    end
   '';
 }
