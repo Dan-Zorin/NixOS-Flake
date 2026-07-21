@@ -73,6 +73,8 @@
     slurp             # Region selector for screenshots
     swappy            # Screenshot editor
     wlr-randr
+    swayidle
+    swaylock-effects
 
     # Notifications
     mako              # Notification daemon
@@ -120,7 +122,7 @@
     strawberry       # Music player
     vlc
     mpv             # Video player
-    # imv            # Image viewer
+    imv            # Image viewer
     # ==========================================
     # Productivity
     # ==========================================
@@ -142,5 +144,6 @@
     libxcb
     libxcb-cursor
     xorg.libX11
+    pulsemixer
   ];
 }

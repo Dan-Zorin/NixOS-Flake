@@ -8,24 +8,19 @@ nixpkgs.config.allowUnfree = true;
 
     # System modules
     ./modules/boot.nix
-    ./modules/mount.nix
-    ./modules/nvidia.nix
+    ./modules/amdgpu.nix
+    ./modules/power.nix
     ./modules/services.nix
     ./modules/networking.nix
     ./modules/virtualization.nix
     ./modules/shotdown.nix
     ./modules/sddm.nix
-    ./modules/gaming.nix
-    ./modules/android.nix
     ./modules/avahi.nix
     ./modules/uwsm.nix
-    ./modules/duckstation.nix
 
-    # System Services
-    ./service/portainer.nix
-    ./service/jellyfin-nginx.nix
-    ./service/ds3.nix
-
+    # Dropped vs. zorin (desktop-only): gaming.nix, android.nix,
+    # duckstation.nix, mount.nix, and service/{portainer,jellyfin-nginx,ds3}.nix.
+    # Re-add any of these under ./modules/ or ./service/ if timothy ever needs them.
   ];
 
   # ==========================================
@@ -33,7 +28,7 @@ nixpkgs.config.allowUnfree = true;
   # ==========================================
 
   # Hostname
-  networking.hostName = "zorin";
+  networking.hostName = "timothy";
 
   # Timezone
   time.timeZone = "America/Panama";
@@ -68,7 +63,7 @@ nixpkgs.config.allowUnfree = true;
     config.common.default = "*";
   };
 
-  # OpenGL/Graphics
+  # OpenGL/Graphics (AMD-specific bits live in modules/amdgpu.nix)
   hardware.graphics = {
     enable = true;
     enable32Bit = true;
@@ -108,22 +103,20 @@ nixpkgs.config.allowUnfree = true;
     htop
     home-manager
     wireguard-tools
-    ventoy-full-gtk
 
     # For Wayland/Hyprland
     inputs.mangowm.packages.${pkgs.system}.mango
     wayland
     xwayland
-    # Hosting Tools only
-    podman-compose
-
 
     # Qt styling for Wayland
     qt5.qtwayland
     qt6.qtwayland
     libsForQt5.qt5ct
 
-    # Kernel Tools
+    # Laptop-specific
+    brightnessctl     # backlight control
+    powertop          # power usage diagnostics
   ];
 
   # Qt theming
@@ -145,6 +138,6 @@ nixpkgs.config.allowUnfree = true;
   # ==========================================
   # System Version
   # ==========================================
-  
+
   system.stateVersion = "26.05";
 }
