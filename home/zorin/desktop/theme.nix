@@ -48,23 +48,20 @@
     x11.enable = true;
   };
 
-  home.packages = [
-    (pkgs.writeShellScriptBin "set-wallpaper" (builtins.readFile ./dotfiles/scripts/set-wallpaper.sh))
-    ];
-
   home.packages = with pkgs; [
-      swww
+      (pkgs.writeShellScriptBin "set-wallpaper" (builtins.readFile "${../../../dotfiles/scripts/set-wallpaper.sh}"))
+      awww
       pywal16
       imagemagick
     ];
 
     systemd.user.services.swww-daemon = {
       Unit = {
-        Description = "swww wallpaper daemon";
+        Description = "awww wallpaper daemon";
         PartOf = [ "graphical-session.target" ];
       };
       Service = {
-        ExecStart = "${pkgs.swww}/bin/swww-daemon";
+        ExecStart = "${pkgs.swww}/bin/awww-daemon";
         Restart = "on-failure";
       };
       Install.WantedBy = [ "graphical-session.target" ];
