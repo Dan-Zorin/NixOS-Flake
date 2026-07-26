@@ -105,6 +105,7 @@
     lutris           # Universal game launcher
     bottles          # Wine manager for Windows games
     prismlauncher    # Minecraft launcher
+    mindustry-wayland
 
     # Game utilities
     gamemode         # Performance optimizer
@@ -112,7 +113,6 @@
     mangohud         # Performance overlay
     goverlay         # MangoHud GUI configurator
     temurin-bin-17   # Java For Modpacks
-    minigalaxy       # Minigalaxy
 
     # Game controllers
     antimicrox       # Gamepad mapper
@@ -120,17 +120,15 @@
     # Media
     # ==========================================
     strawberry       # Music player
+    audacity         #Audio Recorder
     vlc
-    mpv             # Video player
-    imv            # Image viewer
+    mpv              # Video player
+    imv              # Image viewer
     # ==========================================
     # Productivity
     # ==========================================
     vivaldi
-    # obsidian        # Notes
     discord
-    vesktop
-    betterdiscord-installer
     libreoffice-fresh # Writer
     # slack
 

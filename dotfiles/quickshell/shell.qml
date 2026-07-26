@@ -14,7 +14,7 @@ ShellRoot {
     property color colBubble: "#2a2b36"     // Bubble background
     property color colFg: "#a9b1d6"
     property color colMuted: "#444b6a"
-    property color colCyan: "#0db9d7"
+    property color colCyan: "#00ffff"
     property color colPurple: "#ad8ee6"
     property color colRed: "#f7768e"
     property color colYellow: "#e0af68"
@@ -114,8 +114,7 @@ ShellRoot {
         Component.onCompleted: running = true
     }
 
-    // Mango tag + layout state — replaces Hyprland IPC.
-    // Streams one full JSON line per change from `mmsg watch all-tags`.
+    // Mango IPC.
     Process {
         id: mangoTagsProc
         command: ["mmsg", "watch", "all-tags"]

@@ -23,7 +23,7 @@
     # theme = "...";
   };
   boot.consoleLogLevel = 3;
-  boot.kernelPackages = pkgs.linuxPackages;
+  boot.kernelPackages = pkgs.linuxPackages_latest;
 
   # Optional: kernel modules
   # boot.kernelModules = [ "kvm-intel" "kvm-amd" ];

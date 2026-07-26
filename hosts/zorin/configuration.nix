@@ -108,7 +108,6 @@ nixpkgs.config.allowUnfree = true;
     htop
     home-manager
     wireguard-tools
-    ventoy-full-gtk
 
     # For Wayland/Hyprland
     inputs.mangowm.packages.${pkgs.system}.mango
@@ -124,6 +123,8 @@ nixpkgs.config.allowUnfree = true;
     libsForQt5.qt5ct
 
     # Kernel Tools
+    hardinfo2
+    dmidecode
   ];
 
   # Qt theming

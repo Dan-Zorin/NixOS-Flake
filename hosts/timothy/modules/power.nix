@@ -4,8 +4,6 @@
   # ==========================================
   # Laptop Power Management
   # ==========================================
-  # NOTE: option names below should be double-checked with `manix` or a
-  # dry build (see AGENTS.md) once you're on the real machine -- this repo
   # was previously desktop-only and these are new to timothy.
 
   powerManagement.enable = true;

@@ -13,13 +13,13 @@
     };
 
     iconTheme = {
-      name = "Papirus";
-      package = pkgs.papirus-icon-theme;
+      name = "Nordzy";
+      package = pkgs.papirus-nord;
     };
 
     cursorTheme = {
-      name = "Bibata-Modern-Classic";
-      package = pkgs.bibata-cursors;
+      name = "Nordzy cursor theme";
+      package = pkgs.nordzy-cursor-theme;
       size = 24;
     };
 
@@ -47,4 +47,34 @@
     gtk.enable = true;
     x11.enable = true;
   };
+
+  home.packages = [
+    (pkgs.writeShellScriptBin "set-wallpaper" (builtins.readFile ./dotfiles/scripts/set-wallpaper.sh))
+    ];
+
+  home.packages = with pkgs; [
+      swww
+      pywal16
+      imagemagick
+    ];
+
+    systemd.user.services.swww-daemon = {
+      Unit = {
+        Description = "swww wallpaper daemon";
+        PartOf = [ "graphical-session.target" ];
+      };
+      Service = {
+        ExecStart = "${pkgs.swww}/bin/swww-daemon";
+        Restart = "on-failure";
+      };
+      Install.WantedBy = [ "graphical-session.target" ];
+    };
+
+    programs.kitty = {
+      enable = true;
+      settings = {
+        allow_remote_control = "yes";
+        listen_on = "unix:/tmp/kitty_pywal";
+      };
+    };
 }

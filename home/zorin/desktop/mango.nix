@@ -17,5 +17,7 @@
     wl-clipboard     # Clipboard utilities
     flameshot        # Screenshot tool
     slurp            # Region selector
+    satty            # Screenshot annotation
+    grim             # Wayland Screen
   ];
 }
