@@ -1,0 +1,5 @@
+sudo nix run github:nix-community/disko -- \
+  --mode disko \
+  --flake .#zorin
+
+sudo nixos-install --flake .#zorin
