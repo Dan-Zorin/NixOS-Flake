@@ -24,8 +24,7 @@ nixpkgs.config.allowUnfree = true;
     # System Services
     ./service/portainer.nix
     ./service/jellyfin-nginx.nix
-    ./service/ds3.nix
-
+    ./service/udev-rules.nix
   ];
 
   # ==========================================
@@ -89,6 +88,7 @@ nixpkgs.config.allowUnfree = true;
       "audio"           # audio devices
       "libvirtd"        # VMs
       "podman"          # containers
+      "lugdev"          # udev rules
     ];
     shell = pkgs.fish;
   };
