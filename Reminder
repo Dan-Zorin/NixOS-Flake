@@ -3,3 +3,4 @@ sudo nix run github:nix-community/disko -- \
   --flake .#zorin
 
 sudo nixos-install --flake .#zorin
+git clone https://github.com/Dan-Zorin/NixOS-Flake.git
