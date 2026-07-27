@@ -10,6 +10,9 @@
     mangowm.url = "github:mangowm/mango";
     mangowm.inputs.nixpkgs.follows = "nixpkgs";
     spicetify-nix.url = "github:Gerg-L/spicetify-nix";
+    disko = {
+        url = "github:nix-community/disko";
+        inputs.nixpkgs.follows = "nixpkgs";};
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
@@ -20,10 +23,6 @@
         config.allowUnfree = true;
       };
 
-      # ------------------------------
-      # Per-host variables
-      # ------------------------------
-
       hostVars = {
         zorin = {
           username = "zorin";
@@ -32,6 +31,7 @@
           homeDirectory = "/home/zorin";
           timeZone = "America/Panama";
           ddnsHost = "danzorin.ddns.net";
+          disk = "/dev/disk/by-id/ata-Lexar_240GB_SSD_LJA473W102284";
         };
 
         timothy = {
@@ -40,6 +40,7 @@
           hostName = "timothy";
           homeDirectory = "/home/zorin";
           timeZone = "America/Panama";
+          disk = "/dev/disk/by-id/ata-Lexar_240GB_SSD_LJA473W102284";
         };
       };
 
@@ -49,7 +50,9 @@
           specialArgs = { inherit inputs vars; };
           modules = [
             # Main system configuration
+            inputs.disko.nixosModules.disko
             ./hosts/${hostName}/configuration.nix
+
 
             # Home Manager integration
             home-manager.nixosModules.home-manager
@@ -67,7 +70,6 @@
       # ------------------------------
       # NixOS System Configurations
       # ------------------------------
-      # Produces nixosConfigurations.zorin and nixosConfigurations.timothy
       nixosConfigurations = nixpkgs.lib.mapAttrs mkHost hostVars;
 
       # ------------------------------

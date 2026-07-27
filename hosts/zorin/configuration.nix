@@ -5,6 +5,7 @@ nixpkgs.config.allowUnfree = true;
   imports = [
     # Hardware configuration
     ./hardware-configuration.nix
+    ./disko.nix
 
     # System modules
     ./modules/boot.nix
