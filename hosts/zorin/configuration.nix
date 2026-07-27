@@ -88,7 +88,6 @@ nixpkgs.config.allowUnfree = true;
       "audio"           # audio devices
       "libvirtd"        # VMs
       "podman"          # containers
-      "lugdev"          # udev rules
     ];
     shell = pkgs.fish;
   };
