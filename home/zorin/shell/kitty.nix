@@ -12,6 +12,8 @@
     settings = {
       # Theme
       include = "current-theme.conf";
+      allow_remote_control = "yes";
+      listen_on = "unix:/tmp/kitty_pywal";
 
       # Window
       background_opacity = "0.10";
@@ -66,9 +68,4 @@
       "ctrl+shift+backspace" = "restore_font_size";
     };
   };
-
-  # Theme file
- # home.file.".config/kitty/current-theme.conf" = {
- #   source = ../../../dotfiles/kitty/current-theme.conf;
-  #};
 }

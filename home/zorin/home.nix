@@ -49,5 +49,6 @@
   # Let Home Manager manage itself
   programs.home-manager.enable = true;
 
-  home.file.".config/wal/templates/colors.qml".source = ./dotfiles/wal/templates/colors.qml;
+  home.file.".config/wal/templates/colors.qml".source = ../../dotfiles/wal/templates/colors.qml;
+  home.file.".config/wal/templates/qmldir".source = ../../dotfiles/wal/templates/qmldir;
 }

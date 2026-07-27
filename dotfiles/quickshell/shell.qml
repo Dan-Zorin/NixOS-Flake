@@ -4,21 +4,22 @@ import Quickshell.Io
 import Quickshell.Services.SystemTray
 import QtQuick
 import QtQuick.Layouts
+import "file:///home/zorin/.cache/wal" as Wal
 
 ShellRoot {
     id: root
 
     // Theme colors
-    property color colBg: "#1a1b26"
-    property color colBgAlpha: "#cc1a1b26"  // Semi-transparent background
-    property color colBubble: "#2a2b36"     // Bubble background
-    property color colFg: "#a9b1d6"
-    property color colMuted: "#444b6a"
-    property color colCyan: "#00ffff"
-    property color colPurple: "#ad8ee6"
-    property color colRed: "#f7768e"
-    property color colYellow: "#e0af68"
-    property color colBlue: "#7aa2f7"
+    property color colBg: Wal.Colors.background
+    property color colBgAlpha: Qt.rgba(Wal.Colors.background.r, Wal.Colors.background.g, Wal.Colors.background.b, 0.8)
+    property color colBubble: Wal.Colors.color8
+    property color colFg: Wal.Colors.foreground
+    property color colMuted: Wal.Colors.color8
+    property color colCyan: Wal.Colors.color6
+    property color colPurple: Wal.Colors.color5
+    property color colRed: Wal.Colors.color1
+    property color colYellow: Wal.Colors.color3
+    property color colBlue: Wal.Colors.color4
 
     // Font
     property string fontFamily: "BlexMono Nerd Font"

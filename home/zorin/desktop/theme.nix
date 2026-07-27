@@ -14,7 +14,7 @@
 
     iconTheme = {
       name = "Nordzy";
-      package = pkgs.papirus-nord;
+      package = pkgs.nordzy-icon-theme;
     };
 
     cursorTheme = {
