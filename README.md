@@ -4,8 +4,7 @@
     <p>Nord Themed MangoWC on NixOS</p>
 
 ![Size](https://img.shields.io/github/languages/code-size/Dan-Zorin/NixOS-Flake.svg)
-![License](https://img.shields.io/github/license/Dan-Zorin/NixOS-Flake.svg)
-
+![License](https://img.shields.io/github/license/Dan-Zorin/NixOS-Flake.svg?cache=1)
 </div>
 
 ---
