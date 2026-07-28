@@ -3,8 +3,8 @@
     <img src='https://brand.nixos.org/logos/nixos-logo-black-flat-black-regular-horizontal-recommended.svg' width='250' height='250' />
     <p>Nord Themed MangoWC on NixOS</p>
 
-![Size](https://img.shields.io/github/languages/code-size/YOUR_USERNAME/dotfiles.svg)
-![License](https://img.shields.io/github/license/YOUR_USERNAME/dotfiles.svg)
+![Size](https://img.shields.io/github/languages/code-size/Dan-Zorin/dotfiles.svg)
+![License](https://img.shields.io/github/license/Dan-Zorin/dotfiles.svg)
 
 </div>
 
