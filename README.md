@@ -117,7 +117,7 @@ home-manager switch --flake .#<user>@<hostname>
 
 - Stylix still drives most global theming, but the **GTK target was handed
   off to pywal16** so wallpaper changes can re-derive the whole palette.
-- `set-wallpaper` runs `swww img <path>` followed by `wal -i <path>`, then
+- `set-wallpaper` runs `awww img <path>` followed by `wal -i <path>`, then
   Quickshell picks up the regenerated `colors.qml` template on the next
   shell reload.
 - Notifications stay on dunst rather than a Quickshell notification
