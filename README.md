@@ -87,7 +87,7 @@ rebuilt from a single `flake.lock` on new hardware in one command.
 │       ├── dunst.nix
 │       ├── tmux.nix
 │       └── wallpaper/
-│           └── set-wallpaper  # swww + wal -i
+│           └── set-wallpaper  # awww + wal -i
 └── AGENTS.md                  # flake structure + NixOS vs home-manager conventions
 ```
 
