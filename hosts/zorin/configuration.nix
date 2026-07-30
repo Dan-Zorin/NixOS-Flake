@@ -85,23 +85,20 @@ nixpkgs.config.allowUnfree = true;
       "wheel"           # sudo access
       "networkmanager"  # network management
       "video"           # video devices
-      "render"
       "audio"           # audio devices
       "libvirtd"        # VMs
       "podman"          # containers
     ];
-    shell = pkgs.fish;
+    shell = pkgs.nushell;
   };
+  environment.shells = [ pkgs.nushell ];
 
-  # Enable fish system-wide
-  programs.fish.enable = true;
 
   # ==========================================
   # System Packages (keep minimal!)
   # ==========================================
   environment.systemPackages = with pkgs; [
     # Essential tools only
-    vim
     git
     wget
     curl

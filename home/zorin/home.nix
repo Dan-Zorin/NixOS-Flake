@@ -20,7 +20,7 @@
     ./desktop/uwsm.nix
 
     # Shell & terminal
-    ./shell/fish.nix
+    ./shell/nushell.nix
     ./shell/tmux.nix
     ./shell/starship.nix
     ./shell/kitty.nix

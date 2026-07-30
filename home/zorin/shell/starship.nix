@@ -3,6 +3,7 @@
 {
   programs.starship = {
     enable = true;
+    enableNushellIntegration = true;
 
     settings = {
       # Add new line before prompt

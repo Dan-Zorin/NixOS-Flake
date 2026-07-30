@@ -70,8 +70,6 @@
      libva-vdpau-driver
      libvdpau-va-gl
 
-    # NVIDIA (if you have NVIDIA GPU)
-    # Already covered in nvidia.nix
   ];
 
   hardware.graphics.extraPackages32 = with pkgs.pkgsi686Linux; [
@@ -135,20 +133,15 @@
   # Firewall for Gaming
   # ==========================================
 
-  # Common gaming ports (adjust as needed)
   networking.firewall = {
     allowedTCPPorts = [
       # Steam Remote Play
       27036 27037
     ];
     allowedUDPPorts = [
-      # Steam Remote Play & In-Home Streaming
+      # Remote Play & In-Home Streaming
       27031 27036
     ];
   };
-
-  # ==========================================
-  # Wine for Windows Games
-  # ==========================================
 
 }

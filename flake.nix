@@ -35,7 +35,7 @@
         };
 
         timothy = {
-          username = "zorin";
+          username = "tjacob";
           fullName = "Dan Zorin";
           hostName = "timothy";
           homeDirectory = "/home/zorin";

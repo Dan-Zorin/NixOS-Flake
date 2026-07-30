@@ -4,6 +4,7 @@
   programs.tmux = {
     enable = true;
     terminal = "tmux-256color";
+    shell = "${pkgs.nushell}/bin/nu";
     historyLimit = 10000;
     keyMode = "vi";
     mouse = true;

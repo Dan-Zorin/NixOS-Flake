@@ -15,7 +15,7 @@ ShellRoot {
     property color colBubble: "#3B4252"    // nord1
     property color colFg: "#D8DEE9"        // nord4
     property color colMuted: "#4C566A"     // nord3
-    property color colCyan: "#88C0D0"      // nord8
+    property color colCyan: "#a3be8c"      // nord8
     property color colPurple: "#B48EAD"    // nord15
     property color colRed: "#BF616A"       // nord11
     property color colYellow: "#EBCB8B"    // nord13
