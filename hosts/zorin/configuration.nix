@@ -24,7 +24,6 @@ nixpkgs.config.allowUnfree = true;
 
     # System Services
     ./service/portainer.nix
-    ./service/jellyfin-nginx.nix
     ./service/udev-rules.nix
   ];
 

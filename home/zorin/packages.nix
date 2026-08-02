@@ -81,8 +81,7 @@
     libnotify         # notify-send command
 
     # App launchers
-    rofi              # App launcher (supports Wayland)
-    # wofi            # Alternative launcher
+    wofi               # Alternative launcher
 
     # File managers
     xfce.thunar                     # GUI file manager

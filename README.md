@@ -34,7 +34,6 @@ rebuilt from a single `flake.lock` on new hardware in one command.
 ---
 <div align="center">
 
-
 </div>
 <div align="center">
     <h1><b>Music im listening right now</b></h1>
