@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-26.05";
+    nixpkgs-unstable.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nixpkgs-2511.url = "github:NixOS/nixpkgs/nixos-25.11";
     flake-utils.url = "github:numtide/flake-utils";
     home-manager.url = "github:nix-community/home-manager/release-26.05";
@@ -13,12 +14,20 @@
     disko = {
         url = "github:nix-community/disko";
         inputs.nixpkgs.follows = "nixpkgs";};
+    dvr-patched = {
+        url = "git+https://git.sljusard.com/sljusard/dvr-patched-flake.git";
+        inputs.nixpkgs.follows = "nixpkgs";};
   };
 
   outputs = { self, nixpkgs, home-manager, ... }@inputs:
     let
       system = "x86_64-linux";
       pkgs = import nixpkgs {
+        inherit system;
+        config.allowUnfree = true;
+      };
+
+      pkgs-unstable = import inputs.nixpkgs-unstable {
         inherit system;
         config.allowUnfree = true;
       };
@@ -47,7 +56,7 @@
       mkHost = hostName: vars:
         nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit inputs vars; };
+          specialArgs = { inherit inputs vars pkgs-unstable; };
           modules = [
             # Main system configuration
             inputs.disko.nixosModules.disko
@@ -59,7 +68,7 @@
             {
               home-manager.useGlobalPkgs = true;
               home-manager.useUserPackages = true;
-              home-manager.extraSpecialArgs = { inherit inputs vars; };
+              home-manager.extraSpecialArgs = { inherit inputs vars pkgs-unstable; };
               home-manager.users.${vars.username} = import ./home/${vars.username}/home.nix;
               home-manager.backupFileExtension = "backup";
             }
@@ -77,7 +86,7 @@
       # ------------------------------
       homeConfigurations.zorin = home-manager.lib.homeManagerConfiguration {
         inherit pkgs;
-        extraSpecialArgs = { inherit inputs; vars = hostVars.zorin; };
+        extraSpecialArgs = { inherit inputs pkgs-unstable; vars = hostVars.zorin; };
         modules = [ ./home/zorin/home.nix ];
       };
     };

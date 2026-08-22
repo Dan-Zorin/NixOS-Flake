@@ -87,6 +87,7 @@
     # Performance monitoring
     mangohud    # In-game performance overlay
     goverlay    # GUI for MangoHud configuration
+    steam-run-free  # steam utility
 
     # Game launchers (system level, or add to home packages)
     heroic      # Epic Games & GOG

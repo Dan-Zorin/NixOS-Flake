@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, pkgs-unstable, ... }:
 
 {
   home.packages = with pkgs; [
@@ -18,9 +18,7 @@
     yq            # YAML processor
 
     # System monitoring
-    htop
     btop
-    bottom        # btm
 
     # File management
     ranger        # TUI file manager
@@ -104,7 +102,6 @@
     lutris           # Universal game launcher
     bottles          # Wine manager for Windows games
     prismlauncher    # Minecraft launcher
-    mindustry-wayland
 
     # Game utilities
     gamemode         # Performance optimizer
@@ -120,6 +117,8 @@
     # ==========================================
     strawberry       # Music player
     audacity         #Audio Recorder
+    inputs.dvr-patched.packages.${pkgs.stdenv.hostPlatform.system}.default
+
     vlc
     mpv              # Video player
     imv              # Image viewer

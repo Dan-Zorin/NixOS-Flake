@@ -27,7 +27,7 @@ rebuilt from a single `flake.lock` on new hardware in one command.
 
 ## **SHOWCASE**
 
-<img src="https://imgur.com/5uhcsL2.png">
+<img src="https://imgur.com/8L3UJtl.png">
 
 <br />
 

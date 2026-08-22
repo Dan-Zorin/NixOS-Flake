@@ -20,6 +20,26 @@
         "type": "github"
       }
     },
+    "dvr-patched": {
+      "inputs": {
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1784846896,
+        "narHash": "sha256-TCi36MSFQbzTHR4wCYMXpZju/Lwzq1v7L24OxkD+hKs=",
+        "ref": "refs/heads/main",
+        "rev": "db6c4c087bbf18162b04cadfd932f343b233e860",
+        "revCount": 2,
+        "type": "git",
+        "url": "https://git.sljusard.com/sljusard/dvr-patched-flake.git"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.sljusard.com/sljusard/dvr-patched-flake.git"
+      }
+    },
     "flake-parts": {
       "inputs": {
         "nixpkgs-lib": "nixpkgs-lib"
@@ -168,6 +188,22 @@
         "type": "github"
       }
     },
+    "nixpkgs-unstable": {
+      "locked": {
+        "lastModified": 1785602060,
+        "narHash": "sha256-z7D96eESRM4CPV/XtwpwFn8IDdfLAmxz6lVWrGYXvR4=",
+        "owner": "NixOS",
+        "repo": "nixpkgs",
+        "rev": "a5cbcfe954791221bfffe2307f7d1a1bf61a871e",
+        "type": "github"
+      },
+      "original": {
+        "owner": "NixOS",
+        "ref": "nixpkgs-unstable",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs_2": {
       "locked": {
         "lastModified": 1783776592,
@@ -184,11 +220,13 @@
     "root": {
       "inputs": {
         "disko": "disko",
+        "dvr-patched": "dvr-patched",
         "flake-utils": "flake-utils",
         "home-manager": "home-manager",
         "mangowm": "mangowm",
         "nixpkgs": "nixpkgs",
         "nixpkgs-2511": "nixpkgs-2511",
+        "nixpkgs-unstable": "nixpkgs-unstable",
         "spicetify-nix": "spicetify-nix"
       }
     },
